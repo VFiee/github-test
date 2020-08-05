@@ -1,0 +1,52 @@
+._appbar_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  ._appbar_right {
+    visibility: hidden;
+  }
+  ._appbar_title {
+    flex: 1;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    color: #333;
+    line-height: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 10px;
+  }
+  ._menu_bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    ._menu_img_wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      ._menu_icon {
+        &.back {
+          width: 18px;
+          height: 30px;
+        }
+        &.menu {
+          width: 34px;
+          height: 25px;
+        }
+        &.home {
+          width: 34px;
+          height: 34px;
+        }
+        // &.white {
+        //   filter: invert(100%) brightness(20);
+        // }
+      }
+    }
+  }
+  ._menu_img_wrap_hover {
+    background-color: #999 !important;
+  }
+}
