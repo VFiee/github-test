@@ -23,11 +23,13 @@ const config = {
     "@Util": getPath("util"),
     "@Images": getPath("assets/images"),
     "@Components": getPath("components"),
+    "@PageComponents": getPath("page_components"),
     "@Hooks": getPath("hooks"),
     "@Pages": getPath("pages"),
     "@Test": getPath("test"),
     "@THook": getPath("test/hook"),
     "@TRender": getPath("test/render"),
+    "@Types": getPath("types"),
   },
   mini: {
     postcss: {

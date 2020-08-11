@@ -33,6 +33,9 @@
       "@Components/*": [
         "src/components/*"
       ],
+      "@PageComponents/*": [
+        "src/page_components/*"
+      ],
       "@Hooks/*": [
         "src/hooks/*"
       ],
@@ -48,8 +51,11 @@
       "@THook": [
         "src/test/hook/index.tsx"
       ],
-      "@Images": [
+      "@Images/*": [
         "src/assets/images/*"
+      ],
+      "@Types/*": [
+        "src/types/*"
       ]
     }
   },

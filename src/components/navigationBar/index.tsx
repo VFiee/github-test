@@ -1,6 +1,5 @@
 import React, { CSSProperties } from "react";
 import { get } from "lodash";
-import { reLaunch } from "@tarojs/taro";
 import { CoverView, CoverImage, Block } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import useMenuButton, { navigationBarTextStyle } from "@Hooks/useMenuButton";

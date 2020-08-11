@@ -1,7 +1,5 @@
 import React from "react";
-import { View } from "@tarojs/components";
 import TRender from "@TRender";
-// import THook from "@THook";
 import NavigationBar from "@Components/navigationBar";
 import "./index.less";
 
@@ -21,10 +19,7 @@ function Index() {
         }}
         backgroundColor="#00ab84"
       />
-      <View className="index">
-        <TRender />
-        {/* <THook /> */}
-      </View>
+      <TRender />
     </React.Fragment>
   );
 }

@@ -82,7 +82,7 @@ const IndicatorDots = (props: IndicatorProps) => {
   } = props;
   return (
     <View className={wrapperClassName}>
-      {data.map((_, index) => {
+      {data.map((__, index) => {
         const isCurrent: boolean = index === current;
         const mergeStyle = {
           ...(style as React.CSSProperties),
@@ -152,10 +152,15 @@ const Indicator = (props: IndicatorProps) => {
 };
 
 const CarouselItem = (props: ExtendSwiperItemPropsWithData) => {
-  const { data, onClick, extra, ...restProps } = props;
+  const { data, onClick, extra, className = "", style, ...restProps } = props;
   const { src } = data || {};
   return (
-    <SwiperItem {...restProps} onClick={onClick?.bind(null, data)}>
+    <SwiperItem
+      {...restProps}
+      key={data.id}
+      className={`_swiper_item ${className}`}
+      onClick={onClick?.bind(null, data)}
+    >
       <View className="_content">
         <EImage
           src={src}
@@ -178,6 +183,7 @@ const Carousel = (props: CarouselProps) => {
     swiperItemProps = {},
   } = props;
   const {
+    style,
     onClick,
     className = "",
     indicatorType,
@@ -209,7 +215,7 @@ const Carousel = (props: CarouselProps) => {
     onChange?.call(null, eve);
   };
   return (
-    <View className="_swiper-wrap">
+    <View className={`_swiper-wrap ${className}`} style={style}>
       <Swiper
         {...fnProps}
         {...restProps}
@@ -219,11 +225,11 @@ const Carousel = (props: CarouselProps) => {
         className={`_carousel ${className}`}
         indicatorActiveColor={indicatorActiveColor}
       >
-        {carouselData.map((item) => {
+        {carouselData.map((item, index) => {
           return (
             <CarouselItem
-              key={item.id}
               {...swiperItemProps}
+              key={index}
               data={item}
               onClick={onClick}
             />
