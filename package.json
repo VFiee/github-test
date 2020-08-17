@@ -1,6 +1,6 @@
 {
 	"name": "taro-next",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"private": true,
 	"description": "taro-next",
 	"templateInfo": {
@@ -22,15 +22,13 @@
 		"lint": "eslint src --max-warnings 0",
 		"lint:style": "stylelint src --fix",
 		"prettier": "prettier src --write",
-		"version": "npm run changelog",
-		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && prettier CHANGELOG.md --write"
 	},
 	"husky": {
 		"hooks": {
 			"pre-commit": "lint-staged",
-			"commit-msg": [
-				"node scripts/verifyCommit.js && yarn version"
-			]
+			"commit-msg": "node scripts/verifyCommit.js && yarn version",
+			"pre-push": "yarn changelog"
 		}
 	},
 	"lint-staged": {
