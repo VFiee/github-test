@@ -1,3 +1,12 @@
+## [1.0.5](https://github.com/VFiee/github-test/compare/v1.0.4...v1.0.5) (2020-08-17)
+
+
+### Features
+
+* update package.json ([6ecb48f](https://github.com/VFiee/github-test/commit/6ecb48f2d03568516ea1a23a5476f51dcdff9212))
+
+
+
 ## 1.0.2 (2020-08-17)
 
 
