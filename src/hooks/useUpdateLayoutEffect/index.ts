@@ -9,6 +9,7 @@ const useUpdateLayoutEffect: typeof useLayoutEffect = (effect, deps: []) => {
     } else {
       return effect();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };
 
