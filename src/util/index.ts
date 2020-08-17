@@ -1,6 +1,7 @@
 import qs from "qs";
 import _ from "lodash";
-import { BaseObject } from "@Types/index";
+import { BaseObject, BaseMap } from "@Types/index";
+import { isObject } from "./base";
 
 /**
  * 获取七牛云图片地址
@@ -72,4 +73,38 @@ export const getMiniParams = (params: BaseObject): BaseObject => {
     ...qs.parse(decodeURIComponent(q)),
     ...qs.parse(decodeURIComponent(scene)),
   };
+};
+
+/**
+ * 将对象转换成Map
+ * @param {object} obj 转换成Map的原始对象
+ * @param {BaseMap} initMap 初始Map对象,如果存在将在初始Map对象上增加属性,属性存在则覆盖
+ * @returns {BaseMap} 返回转换后的Map对象
+ *
+ */
+export const objectToMap = (obj: BaseObject, initMap?: BaseMap): BaseMap => {
+  initMap = initMap || new Map();
+  if (!isObject(obj)) return initMap;
+  const keys = Object.keys(obj);
+  if (keys.length === 0) return initMap;
+  for (let i = 0, len = keys.length; i < len; i++) {
+    initMap.set(keys[i], obj[keys[i]]);
+  }
+  return initMap;
+};
+
+/**
+ * 将Map转换成对象
+ * @param {BaseMap} map 转换成对象的Map
+ * @param {object} initObj 初始对象,如果存在将在初始对象上增加属性,属性存在则覆盖
+ * @returns {BaseMap} 返回转换后的Map对象
+ *
+ */
+export const mapToObject = (map: BaseMap, initObj?: BaseObject): BaseObject => {
+  let res: BaseObject = initObj || {};
+  if (!(map instanceof Map) || map.size === 0) return res;
+  map.forEach((value, key) => {
+    res[key] = value;
+  });
+  return res;
 };

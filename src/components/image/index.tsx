@@ -10,7 +10,7 @@ export interface ImageOptions extends ImageProps {
 const default_img_src = getImageUrl("recommend");
 
 function EImage(props: ImageOptions) {
-  const { src: propsSrc, onError, errorSrc, className = "", ..._props } = props;
+  const { src: propsSrc, onError, errorSrc, ..._props } = props;
   const [src, setSrc] = useState(propsSrc);
   useEffect(() => {
     const finnalSrc = propsSrc || errorSrc || default_img_src;
@@ -18,16 +18,9 @@ function EImage(props: ImageOptions) {
   }, [propsSrc, errorSrc]);
   function onImageError(eve) {
     errorSrc && setSrc(errorSrc || default_img_src);
-    onError && onError(eve);
+    onError?.(eve);
   }
-  return (
-    <Image
-      {..._props}
-      src={src}
-      onError={onImageError}
-      className={`${className} error_img`}
-    />
-  );
+  return <Image {..._props} src={src} onError={onImageError} />;
 }
 
 export default EImage;

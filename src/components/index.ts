@@ -1,4 +1,4 @@
-export { default as BaseForm } from "./baseForm";
+export { default as BaseForm } from "./form";
 
 export { default as Blank } from "./blank";
 

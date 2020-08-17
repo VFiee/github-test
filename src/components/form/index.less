@@ -1,0 +1,35 @@
+// formItem
+.__form_item__ {
+  width: 100%;
+  display: flex;
+  .__form_component_wrap__ {
+    flex: 1;
+    margin-left: 10px;
+  }
+  .__label__ {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    .__required__ {
+      color: #ff0000;
+      margin-right: 6px;
+    }
+  }
+}
+.__error_msg__ {
+  color: #ff0000;
+}
+
+// checkbox
+.__checkbox_group__ {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .__checkbox__label__ {
+    display: flex;
+    align-items: center;
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
