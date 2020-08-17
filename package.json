@@ -29,8 +29,7 @@
 		"hooks": {
 			"pre-commit": "lint-staged",
 			"commit-msg": [
-				"node scripts/verifyCommit.js",
-				"yarn version"
+				"node scripts/verifyCommit.js && yarn version"
 			]
 		}
 	},
