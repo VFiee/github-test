@@ -1,16 +1,4 @@
-## [1.0.11](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.11) (2020-08-17)
-
-### Features
-
-- test changelog ([8f3acbe](https://github.com/VFiee/github-test/commit/8f3acbef99fc0cb35ddf4ef30a4fe2424bf71326))
-
-## [1.0.10](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.10) (2020-08-17)
-
-### Features
-
-- test changelog ([8f3acbe](https://github.com/VFiee/github-test/commit/8f3acbef99fc0cb35ddf4ef30a4fe2424bf71326))
-
-## [1.0.9](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.9) (2020-08-17)
+## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-08-17)
 
 ### Features
 
@@ -30,7 +18,7 @@
 
 - update package.json ([6ecb48f](https://github.com/VFiee/github-test/commit/6ecb48f2d03568516ea1a23a5476f51dcdff9212))
 
-## 1.0.2 (2020-08-17)
+## [1.0.4](https://github.com/VFiee/github-test/compare/21541dc73fbd6b489467a8c6200102e2c512775d...v1.0.4) (2020-08-17)
 
 ### Bug Fixes
 
@@ -43,5 +31,6 @@
 - add test ([6a35e0b](https://github.com/VFiee/github-test/commit/6a35e0bacb2181278c36c3db932745f7595f768d))
 - change version ([c2d1b02](https://github.com/VFiee/github-test/commit/c2d1b02fc88f531273b8510ea2fad102e2600aef))
 - changelog ([209b640](https://github.com/VFiee/github-test/commit/209b640ac3d728cb22e31f5965957467422bb35b))
+- docs update ([22f604a](https://github.com/VFiee/github-test/commit/22f604a8eafd93d43e5e75eb5d5cdcaa3b6210da))
 - test ([8a90ccb](https://github.com/VFiee/github-test/commit/8a90ccb358e426157cd3c217709997e75d343062))
 - 组件封装 ([21541dc](https://github.com/VFiee/github-test/commit/21541dc73fbd6b489467a8c6200102e2c512775d))
