@@ -26,12 +26,13 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "echo testaaa"
+			"pre-commit": "lint-staged",
+			"commit-msg": "echo msg"
 		}
 	},
 	"lint-staged": {
 		"*.ts": [
-			"echo test success",
+			"yarn lint",
 			"yarn prettier"
 		],
 		"*.js": "eslint --cache --fix",
