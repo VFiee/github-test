@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 
-const useUpdateLayoutEffect: typeof useLayoutEffect = (effect, deps) => {
+const useUpdateLayoutEffect: typeof useLayoutEffect = (effect, deps: []) => {
   const isMounted = useRef(false);
 
   useLayoutEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useMemo } from "react";
+import React, { useImperativeHandle } from "react";
 import { View } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import { BaseObject } from "@/types";

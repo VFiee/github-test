@@ -1,6 +1,7 @@
 {
   "extends": [
-    "taro/react"
+    "taro/react",
+    "prettier"
   ],
   "rules": {
     "jsx-quotes": [
