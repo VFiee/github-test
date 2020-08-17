@@ -1,3 +1,9 @@
+## [1.0.9](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.9) (2020-08-17)
+
+### Features
+
+- test changelog ([8f3acbe](https://github.com/VFiee/github-test/commit/8f3acbef99fc0cb35ddf4ef30a4fe2424bf71326))
+
 ## [1.0.8](https://github.com/VFiee/github-test/compare/v1.0.5...v1.0.8) (2020-08-17)
 
 ### Features

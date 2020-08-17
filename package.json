@@ -1,6 +1,6 @@
 {
 	"name": "taro-next",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"private": true,
 	"description": "taro-next",
 	"templateInfo": {
@@ -26,9 +26,8 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lint-staged",
-			"commit-msg": "node scripts/verifyCommit.js && yarn version",
-			"pre-push": "yarn changelog"
+			"pre-commit": "lint-staged && yarn changelog",
+			"commit-msg": "node scripts/verifyCommit.js && yarn version"
 		}
 	},
 	"lint-staged": {
