@@ -1,18 +1,21 @@
 import React from "react";
 import { Input } from "@tarojs/components";
-import { InputProps } from "@tarojs/components/types/Input";
+import { InputProps } from "@tarojs/components/types/Input.d";
+import { BaseField } from "../field";
 
-interface InternalInputProps extends InputProps {
-  onChange: (args: any) => void;
-}
+interface InternalInputProps extends InputProps, BaseField {}
 
 const Component = (props: InternalInputProps) => {
-  const { onChange, ...restProps } = props;
+  const { fieldChange, fieldValue, value, ...restProps } = props;
   return (
-    <Input {...restProps} onInput={(eve) => onChange?.(eve.detail.value)} />
+    <Input
+      {...restProps}
+      value={fieldValue || value || ""}
+      onInput={(eve) => fieldChange(eve.detail.value)}
+    />
   );
 };
 
-export { InternalInputProps as InputProps };
+export { InputProps };
 
 export default Component;

@@ -35,7 +35,7 @@
 			"yarn lint",
 			"yarn prettier"
 		],
-		"*.{css,less}": "lint:style",
+		"*.{css,less}": "yarn lint:style",
 		"*.{less,md}": "yarn prettier"
 	},
 	"browserslist": [
@@ -77,7 +77,8 @@
 		"lint-staged": "^10.2.11",
 		"mrm": "^2.3.4",
 		"prettier": "^2.0.5",
-		"stylelint": "9.3.0",
+		"stylelint": "^13.6.1",
+		"stylelint-config-standard": "^20.0.0",
 		"typescript": "^3.7.0"
 	}
 }

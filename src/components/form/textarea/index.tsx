@@ -1,8 +1,36 @@
 import React from "react";
-import { View } from "@tarojs/components";
+import { Textarea } from "@tarojs/components";
+import { TextareaProps } from "@tarojs/components/types/Textarea.d";
+import { BaseField } from "../field";
+import "../index.less";
 
-const Input = (props) => {
-  return <View>input</View>;
+interface InternalTextareaProps extends TextareaProps, BaseField {}
+
+const Component = (props: InternalTextareaProps) => {
+  const {
+    fieldValue,
+    fieldChange,
+    maxlength = -1,
+    autoHeight = true,
+    placeholderClass = "",
+    disableDefaultPadding = true,
+    onInput,
+    ...textareaProps
+  } = props;
+  return (
+    <Textarea
+      {...textareaProps}
+      onInput={(eve) => {
+        onInput && onInput(eve);
+        fieldChange(eve.detail.value);
+      }}
+      maxlength={maxlength}
+      autoHeight={autoHeight}
+      disableDefaultPadding={disableDefaultPadding}
+      placeholderClass={`__textarea_placeholder__ ${placeholderClass}`}
+      className={`__textarea__ ${textareaProps?.className || ""}`}
+    />
+  );
 };
-
-export default Input;
+export { TextareaProps };
+export default Component;

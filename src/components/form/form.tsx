@@ -1,10 +1,11 @@
-import React, { useImperativeHandle } from "react";
+import React, { useImperativeHandle, useRef } from "react";
 import { View } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import { BaseObject } from "@/types";
-import { FieldProps } from "@/components/form/formItem";
+import { FieldProps } from "@/components/form/field";
+import { useUpdate } from "@Hooks/index";
 import FormIns from "./_form";
-import Field from "./formItem";
+import Field from "./field";
 
 export interface FormProps extends ViewProps {
   name: string;
@@ -28,13 +29,19 @@ const Form = React.forwardRef((props: FormProps, ref) => {
     className,
     ...restProps
   } = props;
-  const form = new FormIns({
-    initialValues,
-    rules: fields.map((field) => ({
-      key: field.fieldKey,
-      rules: field.rules || [],
-    })),
-  });
+  const update = useUpdate();
+  const { current: form } = useRef(
+    new FormIns({
+      update,
+      onReset,
+      onSubmit,
+      initialValues,
+      rules: fields.map((field) => ({
+        key: field.fieldKey,
+        rules: field.rules || [],
+      })),
+    })
+  );
   useImperativeHandle(ref, () => form);
   return (
     <View {...restProps} ref={ref} className={`__form ${className || ""}`}>

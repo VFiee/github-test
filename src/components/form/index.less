@@ -1,23 +1,44 @@
-// formItem
+// field
 .__form_item__ {
   width: 100%;
   display: flex;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #fff;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    height: 1px;
+    left: 16px;
+    right: 16px;
+    background-color: #eee;
+    bottom: 0;
+    z-index: 1;
+  }
+
   .__form_component_wrap__ {
     flex: 1;
-    margin-left: 10px;
+    margin-left: 18px;
   }
+
   .__label__ {
+    width: 180px;
     font-size: 30px;
     display: flex;
-    align-items: center;
+    text-align: left;
+
     .__required__ {
-      color: #ff0000;
+      color: #f00;
       margin-right: 6px;
     }
   }
 }
+
 .__error_msg__ {
-  color: #ff0000;
+  color: #f00;
 }
 
 // checkbox
@@ -25,11 +46,62 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
   .__checkbox__label__ {
     display: flex;
     align-items: center;
+    font-size: 30px;
+
     &:not(:first-child) {
       margin-left: 20px;
     }
   }
+}
+
+// radio
+.__radio_group__ {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .__radio__label__ {
+    display: flex;
+    align-items: center;
+
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
+
+// slider
+.__slider__ {
+  margin: 10px 18px 10px 30px;
+}
+
+// switch
+.__switch__ {
+  margin-left: 16px;
+}
+
+// textarea
+.__textarea__ {
+  width: 100%;
+  min-height: 150px;
+  max-height: 250px;
+  padding: 10px;
+  font-size: 30px;
+  color: #333;
+  border-radius: 6px;
+  box-sizing: border-box;
+  border: 1px solid #eee;
+}
+
+.__textarea_placeholder__ {
+  color: #666;
+}
+
+// picker
+.__picker__ {
+  height: 100%;
 }

@@ -1,9 +1,11 @@
 import { objectToMap, mapToObject } from "@Util/index";
 import { BaseObject, BaseMap } from "@/types";
 import { isArray, isFunction, isRegExp } from "@/util/base";
-import { FieldRule } from "./formItem";
+import { FieldRule } from "./field";
 
-type SubmitCallback = (data) => any;
+type SubmitCallback = (data: BaseObject) => any;
+
+type FormMethods = "submit" | "reset";
 
 type FieldsError = {
   key: string;
@@ -16,6 +18,9 @@ type FieldsValue = {
   value: any;
 };
 interface FormInitPorps {
+  update: () => void;
+  onReset?: () => void;
+  onSubmit?: (data: any) => any;
   initialValues: BaseObject;
   rules: {
     key: string;
@@ -24,12 +29,17 @@ interface FormInitPorps {
 }
 class Form {
   values: BaseMap;
-  update: () => void;
+  onReset: () => void;
+  formUpdate: () => void;
+  onSubmit: (data: any) => any;
   rules: Map<string, FieldRule[]>;
   errors: Map<string, FieldsError>;
   constructor(props: FormInitPorps) {
-    const { initialValues = {}, rules = [] } = props;
+    const { initialValues = {}, rules = [], update } = props;
     this.errors = new Map();
+    this.formUpdate = update;
+    this.onReset = this.onReset;
+    this.onSubmit = this.onSubmit;
     this.values = objectToMap(initialValues);
     this.rules = this.transformRules(rules);
     // 初始化验证
@@ -48,15 +58,24 @@ class Form {
     });
     return errors;
   }
-  get allValues(): BaseObject {
-    return mapToObject(this.values);
+  triggle(type: FormMethods) {
+    if (type === "reset") {
+      this.reset();
+    } else if (type === "submit") {
+      this.submit();
+    }
   }
-  reset(): void {
-    this.values.clear();
+  private reset(): void {
+    this.values.forEach((_, key) => {
+      this.values.set(key, "");
+    });
+    this.validateFields(null, this.formUpdate);
+    this.onReset?.();
   }
-  submit(fn: SubmitCallback): any {
-    if (this.errors.size === 0) return;
-    return fn(mapToObject(this.values));
+  private submit(): any {
+    this.validateFields(null, this.formUpdate);
+    if (this.errors.size !== 0) return;
+    return this.onSubmit?.(mapToObject(this.values));
   }
   getFieldsError(keys?: string | string[]): FieldsError[] {
     if (keys == null) {
@@ -82,7 +101,18 @@ class Form {
       }
     });
   }
-  getFieldsValue(keys?: string | string[]) {}
+  getFieldsValue(keys?: string | string[]): any {
+    if (typeof keys === "string" && this.values.has(keys)) {
+      return this.values.get(keys);
+    } else if (isArray(keys)) {
+      keys
+        .filter((key) => this.values.has(key))
+        .reduce((res, curr) => {
+          res[curr] = this.values.get(curr);
+          return res;
+        }, {});
+    }
+  }
   setFieldsValue(values: FieldsValue | FieldsValue[], update: () => void) {
     if (!isArray(values)) {
       values = [values];
@@ -97,7 +127,7 @@ class Form {
       this.validateFields(key, update);
     });
   }
-  validateFields(keys?: string | string[], update?: () => void) {
+  validateFields(keys?: string | string[] | null, update?: () => void) {
     if (keys == null) {
       keys = Object.keys(mapToObject(this.rules));
     } else if (typeof keys === "string") {
@@ -105,7 +135,10 @@ class Form {
     }
     keys.forEach((key) => {
       const rules: FieldRule[] = this.rules.get(key) as FieldRule[];
-      if (!rules || rules.length === 0) return;
+      if (!rules || rules.length === 0) {
+        update?.();
+        return;
+      }
       for (let i = 0, len = rules.length; i < len; i++) {
         const {
           message,

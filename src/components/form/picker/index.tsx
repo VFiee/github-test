@@ -1,8 +1,31 @@
 import React from "react";
-import { View } from "@tarojs/components";
+import { Picker } from "@tarojs/components";
+import {
+  PickerDateProps,
+  PickerMultiSelectorProps,
+  PickerRegionProps,
+  PickerSelectorProps,
+  PickerTimeProps,
+} from "@tarojs/components/types/Picker";
+import "../index.less";
 
-const Input = (props) => {
-  return <View>input</View>;
+export type PickerProps =
+  | PickerSelectorProps
+  | PickerMultiSelectorProps
+  | PickerDateProps
+  | PickerTimeProps
+  | PickerRegionProps;
+
+const Component = (props: PickerProps) => {
+  const { ...pickerProps } = props;
+  return (
+    <Picker
+      {...pickerProps}
+      className={`__picker__ ${pickerProps?.className || ""}`}
+    >
+      请选择国家
+    </Picker>
+  );
 };
 
-export default Input;
+export default Component;
