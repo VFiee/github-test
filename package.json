@@ -20,8 +20,8 @@
 		"dev:tt": "npm run build:tt -- --watch",
 		"dev:qq": "npm run build:qq -- --watch",
 		"lint": "eslint src --max-warnings 0",
-		"lint:style": "stylelint src --fix",
-		"prettier": "prettier src --write",
+		"lint:style": "stylelint src --fix && git add .",
+		"prettier": "prettier src --write  && git add .",
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && prettier CHANGELOG.md --write && git add CHANGELOG.md"
 	},
 	"husky": {

@@ -77,22 +77,30 @@ const TestRender = () => {
         className="test_scroll_view"
       /> */}
       <Form
-        initialValues={{
-          text_input: "12312312312",
-          check_box: "2",
-          sex: "2",
-          range: 10,
-          switch: 0,
-        }}
+        initialValues={
+          {
+            // text_input: "12312312312",
+            // check_box: "2",
+            // sex: "2",
+            // range: 10,
+            // switch: 0,
+          }
+        }
         name="testForm"
         fields={[
           {
-            type: "input",
+            fieldType: "input",
             label: "备注信息",
             fieldKey: "text_input",
-            itemProps: {
+            fieldProps: {
               type: "text",
               placeholder: "请输入备注信息",
+              password: true,
+              className: "",
+              onInput: (eve) => {
+                console.log(eve);
+              },
+              disabled: true,
             },
             rules: [
               {
@@ -102,80 +110,80 @@ const TestRender = () => {
               },
             ],
           },
-          {
-            label: "最近地区",
-            type: "checkbox",
-            fieldKey: "check_box",
-            itemProps: {
-              options: [
-                {
-                  label: "郑州",
-                  value: "1",
-                  color: "#00ab84",
-                },
-                {
-                  label: "驻马店",
-                  value: "2",
-                  checked: false,
-                  color: "#00ab84",
-                },
-              ],
-            },
-          },
-          {
-            type: "radio",
-            label: "性别",
-            fieldKey: "sex",
-            itemProps: {
-              options: [
-                {
-                  label: "男",
-                  value: "1",
-                },
-                {
-                  label: "女",
-                  value: "2",
-                },
-              ],
-            },
-          },
-          {
-            type: "slider",
-            label: "滑动选择大小",
-            fieldKey: "range",
-            itemProps: {
-              min: 10,
-              max: 200,
-              step: 10,
-              showValue: true,
-            },
-          },
-          {
-            type: "switch",
-            fieldKey: "switch",
-            label: "开启城市配置",
-            itemProps: {
-              checked: false,
-            },
-          },
-          {
-            type: "textarea",
-            fieldKey: "text_area",
-            label: "备注",
-            itemProps: {
-              fixed: true,
-              placeholder: "请输入备注信息",
-            },
-          },
-          {
-            type: "picker",
-            fieldKey: "picker",
-            label: "国家",
-            itemProps: {
-              mode: "selector",
-              range: ["中国", "美国", "韩国", "意大利"],
-            },
-          },
+          // {
+          //   label: "最近地区",
+          //   fieldType: "checkbox",
+          //   fieldKey: "check_box",
+          //   fieldProps: {
+          //     options: [
+          //       {
+          //         label: "郑州",
+          //         value: "1",
+          //         color: "#00ab84",
+          //       },
+          //       {
+          //         label: "驻马店",
+          //         value: "2",
+          //         checked: false,
+          //         color: "#00ab84",
+          //       },
+          //     ],
+          //   },
+          // },
+          // {
+          //   fieldType: "radio",
+          //   label: "性别",
+          //   fieldKey: "sex",
+          //   fieldProps: {
+          //     options: [
+          //       {
+          //         label: "男",
+          //         value: "1",
+          //       },
+          //       {
+          //         label: "女",
+          //         value: "2",
+          //       },
+          //     ],
+          //   },
+          // },
+          // {
+          //   fieldType: "slider",
+          //   label: "滑动选择大小",
+          //   fieldKey: "range",
+          //   fieldProps: {
+          //     min: 10,
+          //     max: 200,
+          //     step: 10,
+          //     showValue: true,
+          //   },
+          // },
+          // {
+          //   fieldType: "switch",
+          //   fieldKey: "switch",
+          //   label: "开启城市配置",
+          //   fieldProps: {
+          //     checked: false,
+          //   },
+          // },
+          // {
+          //   fieldType: "textarea",
+          //   fieldKey: "text_area",
+          //   label: "备注",
+          //   fieldProps: {
+          //     fixed: true,
+          //     placeholder: "请输入备注信息",
+          //   },
+          // },
+          // {
+          //   fieldType: "picker",
+          //   fieldKey: "picker",
+          //   label: "国家",
+          //   fieldProps: {
+          //     mode: "selector",
+          //     range: ["中国", "美国", "韩国", "意大利"],
+          //   },
+          // },
         ]}
         ref={formRef}
         onSubmit={console.log}

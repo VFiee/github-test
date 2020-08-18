@@ -3,8 +3,6 @@ import { BaseObject, BaseMap } from "@/types";
 import { isArray, isFunction, isRegExp } from "@/util/base";
 import { FieldRule } from "./field";
 
-type SubmitCallback = (data: BaseObject) => any;
-
 type FormMethods = "submit" | "reset";
 
 type FieldsError = {

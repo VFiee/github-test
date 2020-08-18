@@ -17,23 +17,12 @@ import "./index.less";
 
 type FieldType =
   | "input"
-  | "checkbox"
-  | "picker"
   | "radio"
+  | "checkbox"
   | "slider"
   | "switch"
-  | "textarea";
-
-type FieldItemProps =
-  | InputProps
-  | RadioProps
-  | CheckboxProps
-  | SliderProps
-  | SwitchProps
-  | TextareaProps
-  | PickerProps;
-
-export interface ErrorProps extends ViewProps {}
+  | "textarea"
+  | "picker";
 
 export interface FieldRule {
   min?: number;
@@ -50,28 +39,35 @@ export interface BaseField {
   fieldValue: any;
 }
 
-export interface FieldProps extends ViewProps {
+export type FieldProps = ViewProps & {
   label: string;
   labelProps?: LabelProps;
   fieldKey: string;
-  type: FieldType;
-  itemProps: FieldItemProps;
+  fieldType: FieldType;
   wrapperProps?: ViewProps;
   rules?: FieldRule[];
   form?: Form;
-  error?: ErrorProps;
-}
+  errorProps?: ViewProps;
+  fieldProps:
+    | InputProps
+    | RadioProps
+    | CheckboxProps
+    | SliderProps
+    | SwitchProps
+    | TextareaProps
+    | PickerProps;
+};
 
 const Field = (props: FieldProps) => {
   const {
     label,
     labelProps,
     fieldKey,
-    type,
-    itemProps,
+    fieldType,
+    fieldProps,
     wrapperProps,
     form,
-    error,
+    errorProps,
     rules,
     className,
     ...viewProps
@@ -86,7 +82,7 @@ const Field = (props: FieldProps) => {
       switch: Switch,
       textarea: Textarea,
     },
-    type,
+    fieldType,
     Input
   );
   const update = useUpdate();
@@ -110,15 +106,11 @@ const Field = (props: FieldProps) => {
           {...wrapperProps}
           className={`__form_component_wrap__ ${wrapperProps?.className || ""}`}
         >
-          <Component
-            {...itemProps}
-            fieldValue={fieldValue}
-            fieldChange={onChange}
-          />
+          <Component {...{ ...(fieldProps as any), onChange, fieldValue }} />
           {!!fieldErr && fieldErr.length > 0 && (
             <View
-              {...error}
-              className={`__error_msg__ ${error?.className || ""}`}
+              {...errorProps}
+              className={`__error_msg__ ${errorProps?.className || ""}`}
             >
               {fieldErr[0].rule.message}
             </View>

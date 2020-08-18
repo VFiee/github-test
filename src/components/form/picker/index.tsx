@@ -8,6 +8,7 @@ import {
   PickerTimeProps,
 } from "@tarojs/components/types/Picker";
 import "../index.less";
+import { BaseField } from "../field";
 
 export type PickerProps =
   | PickerSelectorProps
@@ -16,7 +17,9 @@ export type PickerProps =
   | PickerTimeProps
   | PickerRegionProps;
 
-const Component = (props: PickerProps) => {
+type InternalPickerProps = PickerProps & BaseField;
+
+const Component = (props: InternalPickerProps) => {
   const { ...pickerProps } = props;
   return (
     <Picker
