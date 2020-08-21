@@ -3,6 +3,8 @@ import _ from "lodash";
 import { BaseObject, BaseMap } from "@Types/index";
 import { isObject } from "./base";
 
+export * from "./base";
+
 /**
  * 获取七牛云图片地址
  * @param {string} name 图片名称

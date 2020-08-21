@@ -9,11 +9,19 @@ import Form from "./_form";
 import Input, { InputProps } from "./input";
 import Radio, { RadioProps } from "./radio";
 import Checkbox, { CheckboxProps } from "./checkbox";
-import Picker, { PickerProps } from "./picker";
 import Slider, { SliderProps } from "./slider";
 import Switch, { SwitchProps } from "./switch";
 import Textarea, { TextareaProps } from "./textarea";
+import Selector, { SelectorProps } from "./picker/selector";
+import MultiSelector, { MultiSelectorProps } from "./picker/multiSelector";
+import TimeSelector, { TimeSelectorProps } from "./picker/time";
+import DateSelector, { DateSelectorProps } from "./picker/date";
+import RegionSelector, { RegionSelectorProps } from "./picker/region";
 import "./index.less";
+
+type NOOP = () => void;
+
+const noop: NOOP = (...args) => null;
 
 type FieldType =
   | "input"
@@ -22,7 +30,11 @@ type FieldType =
   | "slider"
   | "switch"
   | "textarea"
-  | "picker";
+  | "selector"
+  | "multiSelector"
+  | "time"
+  | "date"
+  | "region";
 
 export interface FieldRule {
   min?: number;
@@ -35,11 +47,11 @@ export interface FieldRule {
 }
 
 export interface BaseField {
-  fieldChange: (args: any) => any;
+  fieldChange: (value: any, ignoreUpdate?: boolean) => any;
   fieldValue: any;
 }
 
-export type FieldProps = ViewProps & {
+export interface FieldProps extends ViewProps {
   label: string;
   labelProps?: LabelProps;
   fieldKey: string;
@@ -55,8 +67,12 @@ export type FieldProps = ViewProps & {
     | SliderProps
     | SwitchProps
     | TextareaProps
-    | PickerProps;
-};
+    | SelectorProps
+    | MultiSelectorProps
+    | TimeSelectorProps
+    | DateSelectorProps
+    | RegionSelectorProps;
+}
 
 const Field = (props: FieldProps) => {
   const {
@@ -76,17 +92,21 @@ const Field = (props: FieldProps) => {
     {
       input: Input,
       checkbox: Checkbox,
-      picker: Picker,
       radio: Radio,
       slider: Slider,
       switch: Switch,
       textarea: Textarea,
+      selector: Selector,
+      multiSelector: MultiSelector,
+      time: TimeSelector,
+      date: DateSelector,
+      region: RegionSelector,
     },
     fieldType,
     Input
   );
   const update = useUpdate();
-  const onChange = (value: any) => {
+  const fieldChange = (value: any) => {
     form?.setFieldsValue({ key: fieldKey, value }, update);
   };
   const isRequired = rules?.some((rule) => rule?.required === true);
@@ -106,7 +126,7 @@ const Field = (props: FieldProps) => {
           {...wrapperProps}
           className={`__form_component_wrap__ ${wrapperProps?.className || ""}`}
         >
-          <Component {...{ ...(fieldProps as any), onChange, fieldValue }} />
+          <Component {...{ ...(fieldProps as any), fieldChange, fieldValue }} />
           {!!fieldErr && fieldErr.length > 0 && (
             <View
               {...errorProps}

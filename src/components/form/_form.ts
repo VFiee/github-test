@@ -27,34 +27,34 @@ interface FormInitPorps {
 }
 class Form {
   values: BaseMap;
-  onReset: () => void;
+  onReset?: () => void;
   formUpdate: () => void;
-  onSubmit: (data: any) => any;
+  onSubmit?: (data: any) => any;
   rules: Map<string, FieldRule[]>;
   errors: Map<string, FieldsError>;
   constructor(props: FormInitPorps) {
-    const { initialValues = {}, rules = [], update } = props;
+    const { initialValues = {}, rules = [], onReset, onSubmit, update } = props;
     this.errors = new Map();
     this.formUpdate = update;
-    this.onReset = this.onReset;
-    this.onSubmit = this.onSubmit;
+    this.onReset = onReset;
+    this.onSubmit = onSubmit;
     this.values = objectToMap(initialValues);
     this.rules = this.transformRules(rules);
     // 初始化验证
-    this.validateFields();
+    this.validateFields([], this.formUpdate);
   }
   private transformRules(
     rules: FormInitPorps["rules"]
   ): Map<string, FieldRule[]> {
-    let errors = new Map();
-    if (!isArray(rules) || rules.length == 0) return errors;
+    let ruleMap = new Map();
+    if (!isArray(rules) || rules.length == 0) return ruleMap;
     rules.forEach((rule) => {
       const { key, rules: keyRules } = rule;
-      if (key && keyRules != null && isArray(keyRules)) {
-        errors.set(key, keyRules);
+      if (key && keyRules != null && isArray(keyRules) && keyRules.length > 0) {
+        ruleMap.set(key, keyRules);
       }
     });
-    return errors;
+    return ruleMap;
   }
   triggle(type: FormMethods) {
     if (type === "reset") {
@@ -65,15 +65,15 @@ class Form {
   }
   private reset(): void {
     this.values.forEach((_, key) => {
-      this.values.set(key, "");
+      this.values.set(key, null);
     });
     this.validateFields(null, this.formUpdate);
     this.onReset?.();
   }
-  private submit(): any {
+  private submit(): void {
     this.validateFields(null, this.formUpdate);
     if (this.errors.size !== 0) return;
-    return this.onSubmit?.(mapToObject(this.values));
+    this.onSubmit?.(mapToObject(this.values));
   }
   getFieldsError(keys?: string | string[]): FieldsError[] {
     if (keys == null) {
@@ -131,12 +131,13 @@ class Form {
     } else if (typeof keys === "string") {
       keys = [keys];
     }
+    keys = keys.filter((key) => this.rules.get(key));
     keys.forEach((key) => {
       const rules: FieldRule[] = this.rules.get(key) as FieldRule[];
-      if (!rules || rules.length === 0) {
-        update?.();
-        return;
-      }
+      // if (!rules || rules.length === 0) {
+      //   update?.();
+      //   return;
+      // }
       for (let i = 0, len = rules.length; i < len; i++) {
         const {
           message,
@@ -158,6 +159,7 @@ class Form {
         } else {
           const valueLen: number = value?.length || 0;
           const validatorResult = {
+            required: value != null && value !== "",
             min: min ? valueLen >= min : !min,
             max: max ? valueLen <= max : !max,
             pattern: isRegExp(pattern) ? pattern?.test(value) : true,

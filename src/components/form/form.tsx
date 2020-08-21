@@ -10,7 +10,7 @@ import Field from "./field";
 export interface FormProps extends ViewProps {
   name: string;
   fields?: FieldProps[];
-  onSubmit?: (data) => any;
+  onSubmit?: (data: any) => any;
   onReset?: () => void;
   onError?: (...args) => void;
   initialValues?: BaseObject;

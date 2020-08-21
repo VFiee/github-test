@@ -13,13 +13,17 @@ import Form, { CreateForm } from "@Components/form";
 // import Image from "./image";
 import "./index.less";
 
+// const mutipleArr = [
+//   ["无脊柱动物", "脊柱动物"],
+//   ["扁性动物", "线形动物", "环节动物", "软体动物", "节肢动物"],
+//   ["猪肉绦虫", "吸血虫"],
+// ];
 // const Test = (props) => {
-//   const id = props.data.id;
-//   return (
-//     <View className="test_extra" onClick={() => console.log(props)}>
-//       {id}
-//     </View>
-//   );
+//   const string: string = " ";
+//   const [value, setValue] = useState(props.fieldValue);
+//   console.log(`value:`, value, `typeof :value=`, typeof value);
+
+//   return <View className="test_extra">test</View>;
 // };
 // const service = (params): Promise<BaseObject> => {
 //   console.log(params);
@@ -41,6 +45,7 @@ const TestRender = () => {
   const formRef = useRef<CreateForm>();
   return (
     <View className="wrap">
+      {/* <Test value="123" fieldValue="" /> */}
       {/* <Image />
       <Blank />
       <BottomLine />
@@ -77,15 +82,15 @@ const TestRender = () => {
         className="test_scroll_view"
       /> */}
       <Form
-        initialValues={
-          {
-            // text_input: "12312312312",
-            // check_box: "2",
-            // sex: "2",
-            // range: 10,
-            // switch: 0,
-          }
-        }
+        initialValues={{
+          text_input: "12312312312",
+          check_box: "2",
+          sex: "2",
+          range: 10,
+          switch: 0,
+          selector: 0,
+          selector2: "china",
+        }}
         name="testForm"
         fields={[
           {
@@ -100,7 +105,6 @@ const TestRender = () => {
               onInput: (eve) => {
                 console.log(eve);
               },
-              disabled: true,
             },
             rules: [
               {
@@ -110,80 +114,120 @@ const TestRender = () => {
               },
             ],
           },
-          // {
-          //   label: "最近地区",
-          //   fieldType: "checkbox",
-          //   fieldKey: "check_box",
-          //   fieldProps: {
-          //     options: [
-          //       {
-          //         label: "郑州",
-          //         value: "1",
-          //         color: "#00ab84",
-          //       },
-          //       {
-          //         label: "驻马店",
-          //         value: "2",
-          //         checked: false,
-          //         color: "#00ab84",
-          //       },
-          //     ],
-          //   },
-          // },
-          // {
-          //   fieldType: "radio",
-          //   label: "性别",
-          //   fieldKey: "sex",
-          //   fieldProps: {
-          //     options: [
-          //       {
-          //         label: "男",
-          //         value: "1",
-          //       },
-          //       {
-          //         label: "女",
-          //         value: "2",
-          //       },
-          //     ],
-          //   },
-          // },
-          // {
-          //   fieldType: "slider",
-          //   label: "滑动选择大小",
-          //   fieldKey: "range",
-          //   fieldProps: {
-          //     min: 10,
-          //     max: 200,
-          //     step: 10,
-          //     showValue: true,
-          //   },
-          // },
-          // {
-          //   fieldType: "switch",
-          //   fieldKey: "switch",
-          //   label: "开启城市配置",
-          //   fieldProps: {
-          //     checked: false,
-          //   },
-          // },
-          // {
-          //   fieldType: "textarea",
-          //   fieldKey: "text_area",
-          //   label: "备注",
-          //   fieldProps: {
-          //     fixed: true,
-          //     placeholder: "请输入备注信息",
-          //   },
-          // },
-          // {
-          //   fieldType: "picker",
-          //   fieldKey: "picker",
-          //   label: "国家",
-          //   fieldProps: {
-          //     mode: "selector",
-          //     range: ["中国", "美国", "韩国", "意大利"],
-          //   },
-          // },
+          {
+            label: "最近地区",
+            fieldType: "checkbox",
+            fieldKey: "check_box",
+            fieldProps: {
+              options: [
+                {
+                  label: "郑州",
+                  value: "1",
+                  color: "#00ab84",
+                },
+                {
+                  label: "驻马店",
+                  value: "2",
+                  checked: false,
+                  color: "#00ab84",
+                },
+              ],
+            },
+          },
+          {
+            fieldType: "radio",
+            label: "性别",
+            fieldKey: "sex",
+            fieldProps: {
+              options: [
+                {
+                  label: "男",
+                  value: "1",
+                },
+                {
+                  label: "女",
+                  value: "2",
+                },
+              ],
+            },
+          },
+          {
+            fieldType: "slider",
+            label: "滑动选择大小",
+            fieldKey: "range",
+            fieldProps: {
+              min: 10,
+              max: 200,
+              step: 10,
+              showValue: true,
+            },
+          },
+          {
+            fieldType: "switch",
+            fieldKey: "switch",
+            label: "开启城市配置",
+            fieldProps: {
+              checked: false,
+            },
+          },
+          {
+            fieldType: "textarea",
+            fieldKey: "text_area",
+            label: "备注",
+            fieldProps: {
+              fixed: true,
+              placeholder: "请输入备注信息",
+            },
+          },
+          {
+            fieldType: "selector",
+            fieldKey: "selector",
+            label: "国家",
+            fieldProps: {
+              placeholder: "请选择国家",
+              range: ["中国", "美国", "韩国", "意大利"],
+            },
+            // rules: [
+            //   {
+            //     required: true,
+            //     message: "请选择国家啊!",
+            //   },
+            // ],
+          },
+          {
+            fieldType: "selector",
+            fieldKey: "selector2",
+            label: "国家2",
+            fieldProps: {
+              placeholder: "请选择国家2",
+              rangeKey: "name",
+              rangeValueKey: "value",
+              range: [
+                {
+                  name: "中国",
+                  value: "china",
+                },
+                {
+                  name: "美国",
+                  value: "america",
+                },
+                {
+                  name: "韩国",
+                  value: "korea",
+                },
+                {
+                  name: "意大利",
+                  value: "italy",
+                },
+              ],
+            },
+            // rules: [
+            //   {
+            //     required: true,
+            //     message: "请选择国家啊!",
+            //   },
+            // ],
+          },
         ]}
         ref={formRef}
         onSubmit={console.log}

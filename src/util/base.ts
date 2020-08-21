@@ -25,6 +25,23 @@ export const getTypeof = (value: any): string => {
 };
 
 /**
+ *
+ * @param {any} value 任意合法值
+ * @returns {string} 返回boolean
+ *
+ */
+export const isNull = (value: any): boolean => value === null;
+
+/**
+ *
+ * @param {any} value 任意合法值
+ * @returns {string} 返回boolean
+ *
+ */
+export const isUndefined = (value: any): boolean =>
+  typeof value === "undefined";
+
+/**
  * 判断当前值是否为对象
  * @param {any} value 任意合法值
  * @returns {boolean} 返回boolean
