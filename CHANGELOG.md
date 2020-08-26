@@ -2,6 +2,7 @@
 
 ### Features
 
+- add multiSelector component ([c6f975f](https://github.com/VFiee/github-test/commit/c6f975fe0296b124074218a29fb2150d84a0653c))
 - test changelog ([8f3acbe](https://github.com/VFiee/github-test/commit/8f3acbef99fc0cb35ddf4ef30a4fe2424bf71326))
 - 增加 Selector 组件 ([ccab599](https://github.com/VFiee/github-test/commit/ccab5994b311a643ac3f44a56287beac94af7eb0))
 - 改进 form 组件(not picker) ([3c5bfae](https://github.com/VFiee/github-test/commit/3c5bfae98ca9d0f8ef56af2376a6fd6cce9d4793))

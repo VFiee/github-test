@@ -32,12 +32,12 @@
 		}
 	},
 	"lint-staged": {
-		"*.{js,ts}": [
+		"src/*.{js,ts}": [
 			"yarn lint",
 			"yarn prettier"
 		],
-		"*.{css,less}": "yarn lint:style",
-		"*.{less,md}": "yarn prettier"
+		"src/*.{css,less}": "yarn lint:style",
+		"src/*.{less,md}": "yarn prettier"
 	},
 	"browserslist": [
 		"last 3 versions",
