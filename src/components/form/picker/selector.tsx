@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { get, findIndex } from "lodash";
+import React, { useMemo } from "react";
+import { get, findIndex, indexOf } from "lodash";
 import { Picker, View } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import { PickerSelectorProps } from "@tarojs/components/types/Picker";
-import { isNull, isObject, isUndefined } from "@Util/index";
+import { isObject, isUndefined } from "@Util/index";
 import { BaseField } from "../field";
 import "./index.less";
 
@@ -36,7 +36,8 @@ const pickerValueToIndex = (props: InternalPickerProps): number | null => {
     const index = findIndex(range, { [rangeValueKey]: fieldValue });
     return index > -1 ? index : null;
   }
-  return isUndefined(fieldValue) ? null : fieldValue;
+  const index = indexOf(range, fieldValue);
+  return isUndefined(fieldValue) || index === -1 ? null : index;
 };
 
 const pickerIndexToValue = (
@@ -60,31 +61,26 @@ const Component = (props: InternalPickerProps) => {
     placeholderProps,
     ...pickerProps
   } = props;
-  const pickerIndex = pickerValueToIndex(props);
-  const [value, setValue] = useState(pickerIndex);
-  useEffect(() => {
-    setValue(pickerIndex);
-  }, [pickerIndex]);
-  const onPickerChange = (eve) => {
-    fieldChange(pickerIndexToValue(props, eve.detail.value));
-    setValue(eve.detail.value);
-  };
-  const showPlaceholder = isNull(value);
+  const value = useMemo(() => pickerValueToIndex(props), [props]);
+  const pickerValue = useMemo(() => getPickerShowText(props, value as number), [
+    props,
+    value,
+  ]);
   return (
     <Picker
       {...pickerProps}
-      onChange={onPickerChange}
       value={value as number}
       className={`__selector_picker__ ${className}`}
+      onChange={(eve) => {
+        fieldChange(pickerIndexToValue(props, eve.detail.value));
+      }}
     >
       <View
-        className={`${showPlaceholder ? "__picker_placeholder__" : ""} ${
+        className={`${value == null ? "__picker_placeholder__" : ""} ${
           placeholderProps?.className || ""
         }`}
       >
-        {showPlaceholder
-          ? placeholder
-          : getPickerShowText(props, value as number)}
+        {value == null ? placeholder : pickerValue}
       </View>
     </Picker>
   );

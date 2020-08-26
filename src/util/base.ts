@@ -1,3 +1,5 @@
+const objectProto = Object.prototype;
+
 /**
  * @param {any} target 检测的值
  * @returns {boolean} 返回布尔值,`true`表示是数组,`false`表示不是数组
@@ -6,13 +8,21 @@
 export const isArray = Array.isArray;
 
 /**
+ * 检测当前值是否为buffer类型
+ * @params {any} value 检测的值
+ * @returns {boolean} 返回boolean
+ *
+ */
+export const isBuffer = Buffer ? Buffer.isBuffer : (_value: any) => false;
+
+/**
  * 获取任意值的字符串类型
  * @param {any} value 转换为字符串的数据
  * @returns {string} 返回 Object.prototype.toString.call(value) 的值
  *
  */
 export const toString = (value: any): string =>
-  Object.prototype.toString.call(value);
+  objectProto.toString.call(value);
 
 /**
  *
@@ -118,3 +128,52 @@ export const isPromise = (value: any): boolean =>
  *
  */
 export const isRegExp = (value: any): boolean => getTypeof(value) === "RegExp";
+
+/**
+ * 检测当前值是否为Boolean类型
+ * @param {any} value 任意合法值
+ * @returns {boolean} 返回boolean
+ */
+export const isBoolean = (value: any): boolean =>
+  typeof value === "boolean" || getTypeof(value) === "Boolean";
+
+/**
+ * 检测当前值是否为Arguments类型
+ * @param {any} value 任意合法值
+ * @returns {boolean} 返回boolean
+ */
+export const isArguments = (value: any): boolean => {
+  return (
+    isObject(value) &&
+    objectProto.hasOwnProperty.call(value, "callee") &&
+    objectProto.propertyIsEnumerable("callee") &&
+    isFunction(value.callee)
+  );
+};
+
+/**
+ * 检测当前值是否为空
+ * @param {any} value 任意合法值
+ * @returns {boolean} 返回boolean
+ *
+ */
+export const isEmpty = (value: any): boolean => {
+  if (value == null) return true;
+  if (
+    typeof value === "string" ||
+    isArray(value) ||
+    isBuffer(value) ||
+    isArguments(value)
+  ) {
+    return !value.length;
+  }
+  if (isSet(value) || isMap(value)) {
+    return !value.size;
+  }
+  for (const key in value) {
+    if (objectProto.hasOwnProperty.call(value, key)) {
+      return false;
+    }
+  }
+  return true;
+};

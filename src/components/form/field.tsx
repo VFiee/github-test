@@ -47,7 +47,7 @@ export interface FieldRule {
 }
 
 export interface BaseField {
-  fieldChange: (value: any, ignoreUpdate?: boolean) => any;
+  fieldChange: (value: any) => any;
   fieldValue: any;
 }
 

@@ -1,7 +1,7 @@
 import qs from "qs";
 import _ from "lodash";
 import { BaseObject, BaseMap } from "@Types/index";
-import { isObject } from "./base";
+import { isArray, isBoolean, isBuffer, isObject } from "./base";
 
 export * from "./base";
 

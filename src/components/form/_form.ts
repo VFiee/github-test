@@ -1,6 +1,12 @@
-import { objectToMap, mapToObject } from "@Util/index";
+import {
+  objectToMap,
+  mapToObject,
+  isArray,
+  isFunction,
+  isRegExp,
+  isEmpty,
+} from "@Util/index";
 import { BaseObject, BaseMap } from "@/types";
-import { isArray, isFunction, isRegExp } from "@/util/base";
 import { FieldRule } from "./field";
 
 type FormMethods = "submit" | "reset";
@@ -41,7 +47,7 @@ class Form {
     this.values = objectToMap(initialValues);
     this.rules = this.transformRules(rules);
     // 初始化验证
-    this.validateFields([], this.formUpdate);
+    this.validateFields();
   }
   private transformRules(
     rules: FormInitPorps["rules"]
@@ -64,10 +70,10 @@ class Form {
     }
   }
   private reset(): void {
-    this.values.forEach((_, key) => {
-      this.values.set(key, null);
-    });
-    this.validateFields(null, this.formUpdate);
+    if (this.values.size !== 0) {
+      this.values.clear();
+      this.validateFields(null, this.formUpdate);
+    }
     this.onReset?.();
   }
   private submit(): void {
@@ -132,12 +138,12 @@ class Form {
       keys = [keys];
     }
     keys = keys.filter((key) => this.rules.get(key));
+    if (isEmpty(keys)) {
+      update?.();
+      return;
+    }
     keys.forEach((key) => {
       const rules: FieldRule[] = this.rules.get(key) as FieldRule[];
-      // if (!rules || rules.length === 0) {
-      //   update?.();
-      //   return;
-      // }
       for (let i = 0, len = rules.length; i < len; i++) {
         const {
           message,

@@ -20,6 +20,7 @@ const Component = (props: InternalTextareaProps) => {
   return (
     <Textarea
       {...textareaProps}
+      value={fieldValue || ""}
       onInput={(eve) => {
         onInput && onInput(eve);
         fieldChange(eve.detail.value);

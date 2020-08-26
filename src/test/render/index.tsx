@@ -9,15 +9,11 @@ import { View } from "@tarojs/components";
 // import EnsureLogin from "@PageComponents/ensureLogin";
 // import List from "@Components/list";
 import Form, { CreateForm } from "@Components/form";
+import datas from "./multipleSelector";
 // import { BaseObject } from "@Types/index";
 // import Image from "./image";
 import "./index.less";
 
-// const mutipleArr = [
-//   ["无脊柱动物", "脊柱动物"],
-//   ["扁性动物", "线形动物", "环节动物", "软体动物", "节肢动物"],
-//   ["猪肉绦虫", "吸血虫"],
-// ];
 // const Test = (props) => {
 //   const string: string = " ";
 //   const [value, setValue] = useState(props.fieldValue);
@@ -88,7 +84,7 @@ const TestRender = () => {
           sex: "2",
           range: 10,
           switch: 0,
-          selector: 0,
+          selector: "美国",
           selector2: "china",
         }}
         name="testForm"
@@ -100,18 +96,18 @@ const TestRender = () => {
             fieldProps: {
               type: "text",
               placeholder: "请输入备注信息",
-              password: true,
+              // password: true,
               className: "",
               onInput: (eve) => {
                 console.log(eve);
               },
             },
             rules: [
-              {
-                required: true,
-                min: 10,
-                message: "最低长度为10",
-              },
+              // {
+              //   required: true,
+              //   min: 10,
+              //   message: "最低长度为10",
+              // },
             ],
           },
           {
@@ -195,31 +191,16 @@ const TestRender = () => {
             // ],
           },
           {
-            fieldType: "selector",
-            fieldKey: "selector2",
-            label: "国家2",
+            fieldType: "multiSelector",
+            fieldKey: "multiSelector",
+            label: "请选择城市",
             fieldProps: {
-              placeholder: "请选择国家2",
+              placeholder: "请选择城市",
               rangeKey: "name",
               rangeValueKey: "value",
-              range: [
-                {
-                  name: "中国",
-                  value: "china",
-                },
-                {
-                  name: "美国",
-                  value: "america",
-                },
-                {
-                  name: "韩国",
-                  value: "korea",
-                },
-                {
-                  name: "意大利",
-                  value: "italy",
-                },
-              ],
+              rangeChildrenKey: "children",
+              range: datas,
+              rangeValueSeparator: ",",
             },
             // rules: [
             //   {

@@ -1,8 +1,9 @@
-## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-08-21)
+## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-08-26)
 
 ### Features
 
 - test changelog ([8f3acbe](https://github.com/VFiee/github-test/commit/8f3acbef99fc0cb35ddf4ef30a4fe2424bf71326))
+- 增加 Selector 组件 ([ccab599](https://github.com/VFiee/github-test/commit/ccab5994b311a643ac3f44a56287beac94af7eb0))
 - 改进 form 组件(not picker) ([3c5bfae](https://github.com/VFiee/github-test/commit/3c5bfae98ca9d0f8ef56af2376a6fd6cce9d4793))
 
 ## [1.0.8](https://github.com/VFiee/github-test/compare/v1.0.5...v1.0.8) (2020-08-17)
