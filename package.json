@@ -51,6 +51,7 @@
 		"@tarojs/react": "3.0.7",
 		"@tarojs/runtime": "3.0.7",
 		"@tarojs/taro": "3.0.7",
+		"dayjs": "^1.8.34",
 		"qs": "^6.9.4",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",

@@ -209,6 +209,22 @@ const TestRender = () => {
             //   },
             // ],
           },
+          {
+            fieldType: "date",
+            fieldKey: "date",
+            label: "日期",
+            fieldProps: {
+              placeholder: "请选择日期",
+            },
+          },
+          {
+            fieldType: "time",
+            fieldKey: "time",
+            label: "时间",
+            fieldProps: {
+              placeholder: "请选择时间",
+            },
+          },
         ]}
         ref={formRef}
         onSubmit={console.log}
