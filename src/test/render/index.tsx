@@ -225,6 +225,15 @@ const TestRender = () => {
               placeholder: "请选择时间",
             },
           },
+          {
+            fieldType: "region",
+            fieldKey: "region",
+            label: "省市区",
+            fieldProps: {
+              value: [],
+              placeholder: "请选择时间",
+            },
+          },
         ]}
         ref={formRef}
         onSubmit={console.log}

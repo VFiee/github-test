@@ -11,14 +11,11 @@ interface PlaceholderProps {
   placeholderProps?: ViewProps;
 }
 
-export interface TimeSelectorProps
-  extends PickerDateProps,
-    PlaceholderProps,
-    BaseField {
+export interface TimeSelectorProps extends PickerDateProps, PlaceholderProps {
   showTextFormat: (time: string) => string;
 }
 
-interface InternalDateSelectProps extends TimeSelectorProps {}
+interface InternalDateSelectProps extends TimeSelectorProps, BaseField {}
 
 const Component = (props: InternalDateSelectProps) => {
   const {
