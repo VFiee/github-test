@@ -19,10 +19,6 @@ import DateSelector, { DateSelectorProps } from "./picker/date";
 import RegionSelector, { RegionSelectorProps } from "./picker/region";
 import "./index.less";
 
-type NOOP = () => void;
-
-const noop: NOOP = (...args) => null;
-
 type FieldType =
   | "input"
   | "radio"

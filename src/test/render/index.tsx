@@ -230,8 +230,7 @@ const TestRender = () => {
             fieldKey: "region",
             label: "省市区",
             fieldProps: {
-              value: [],
-              placeholder: "请选择时间",
+              placeholder: "请选择地区",
             },
           },
         ]}
