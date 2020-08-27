@@ -45,8 +45,8 @@
       "@Test/*": [
         "src/test/*"
       ],
-      "@TRender": [
-        "src/test/render/index.tsx"
+      "@TRender/*": [
+        "src/test/render/*"
       ],
       "@THook": [
         "src/test/hook/index.tsx"

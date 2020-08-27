@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { ScrollView } from "@tarojs/components";
 import { ScrollViewProps } from "@tarojs/components/types/ScrollView";
-import Line from "@Components/bottomLine";
+import Line from "@/components/divider";
 import Loading from "@Components/bottomLoading";
 import { BaseObject } from "@Types/index";
 import { showLoading, hideLoading } from "@tarojs/taro";

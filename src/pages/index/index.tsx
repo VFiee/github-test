@@ -1,5 +1,5 @@
 import React from "react";
-import TRender from "@TRender";
+import Test from "@TRender/render";
 import NavigationBar from "@Components/navigationBar";
 import "./index.less";
 
@@ -19,7 +19,7 @@ function Index() {
         }}
         backgroundColor="#00ab84"
       />
-      <TRender />
+      <Test />
     </React.Fragment>
   );
 }

@@ -6,6 +6,7 @@
 - add picker region component ([597c925](https://github.com/VFiee/github-test/commit/597c925bd2c3a3fa4e34986394dcba7a5debe735))
 - add time&date picker component ([e7b03b4](https://github.com/VFiee/github-test/commit/e7b03b49ec37dc932afe6d7d84c146eebb907f3c))
 - test changelog ([8f3acbe](https://github.com/VFiee/github-test/commit/8f3acbef99fc0cb35ddf4ef30a4fe2424bf71326))
+- 删除冗余属性 ([efec5a5](https://github.com/VFiee/github-test/commit/efec5a5e4eb9abc825e38665a1f250c15ad42601))
 - 增加 Selector 组件 ([ccab599](https://github.com/VFiee/github-test/commit/ccab5994b311a643ac3f44a56287beac94af7eb0))
 - 改进 form 组件(not picker) ([3c5bfae](https://github.com/VFiee/github-test/commit/3c5bfae98ca9d0f8ef56af2376a6fd6cce9d4793))
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "@tarojs/components";
-import { ExtendsViewProps } from "../bottomLine";
+import { ExtendsViewProps } from "../divider";
 import "./index.less";
 
 const default_loading_text = "正在加载...";
