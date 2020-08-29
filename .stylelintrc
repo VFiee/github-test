@@ -1,3 +1,7 @@
 {
-    "extends": "stylelint-config-standard"
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "src/**/*.png"
+  ],
+  "ignorePath": "src/assets/*"
 }

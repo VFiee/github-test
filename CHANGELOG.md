@@ -1,4 +1,4 @@
-## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-08-27)
+## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-08-29)
 
 ### Features
 
