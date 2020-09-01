@@ -30,4 +30,8 @@ const Empty = (props: EmptyProps) => {
   );
 };
 
+Empty.options = {
+  addGlobalClass: true,
+};
+
 export default Empty;

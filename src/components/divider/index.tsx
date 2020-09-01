@@ -34,4 +34,8 @@ const Divider = (props: DividerProps) => {
   );
 };
 
+Divider.options = {
+  addGlobalClass: true,
+};
+
 export default Divider;

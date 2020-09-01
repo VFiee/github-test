@@ -203,4 +203,8 @@ const NavigationBar = (props: NavigationBarProps) => {
   );
 };
 
+NavigationBar.options = {
+  addGlobalClass: true,
+};
+
 export default NavigationBar;

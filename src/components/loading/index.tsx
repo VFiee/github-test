@@ -54,5 +54,8 @@ const Loading = (props: LoadingProps) => {
     </View>
   );
 };
+Loading.options = {
+  addGlobalClass: true,
+};
 
 export default Loading;

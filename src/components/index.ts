@@ -1,10 +1,10 @@
 export { default as BaseForm } from "./form";
 
-export { default as Blank } from "./empty";
+export { default as Empty } from "./empty";
 
-export { default as BottomLine } from "./divider";
+export { default as Divider } from "./divider";
 
-export { default as BottomLoading } from "./loading";
+export { default as Loading } from "./loading";
 
 export { default as Image } from "./image";
 

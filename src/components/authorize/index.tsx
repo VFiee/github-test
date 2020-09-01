@@ -1,12 +1,11 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { Button } from "@tarojs/components";
 import { ButtonProps } from "@tarojs/components/types/Button";
 import "./index.less";
 
 export interface AuthorizeProps extends ButtonProps {
   isSatisfy: boolean;
-  children?: string | ReactElement;
-  openType: keyof ButtonProps.openType;
+  children?: React.ReactElement;
 }
 
 const Authorize = (props: AuthorizeProps) => {
@@ -14,7 +13,7 @@ const Authorize = (props: AuthorizeProps) => {
   return (
     <React.Fragment>
       {!isSatisfy ? (
-        <Button {...restProps} className={`_authorize_button ${className}`}>
+        <Button {...restProps} className={`_authorize__button__ ${className}`}>
           {!!children && children}
         </Button>
       ) : (
@@ -22,6 +21,10 @@ const Authorize = (props: AuthorizeProps) => {
       )}
     </React.Fragment>
   );
+};
+
+Authorize.options = {
+  addGlobalClass: true,
 };
 
 export default Authorize;

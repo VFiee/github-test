@@ -5,6 +5,7 @@ import {
   SwiperItem,
   View,
   Text,
+  Image,
   StandardProps,
 } from "@tarojs/components";
 import { SwiperProps } from "@tarojs/components/types/Swiper";
@@ -166,7 +167,7 @@ const CarouselItem = (props: ExtendSwiperItemPropsWithData) => {
           src={src}
           mode="aspectFit"
           className="_carousel_img"
-          errorSrc={getImageUrl("lunbo")}
+          error={<Image mode="aspectFit" src={getImageUrl("lunbo")} />}
         />
       </View>
       {!!extra && extra(data)}
