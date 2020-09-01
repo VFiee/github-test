@@ -6,8 +6,10 @@ type StyleResult = string | React.CSSProperties;
 function objectToString(object: object | string): string {
   if (typeof object === "string") return object;
   let res: string = "";
-  Object.keys((key) => {
-    res += `${key}:${object[key]};`;
+  Object.keys(object).forEach((key) => {
+    if (object[key] != null) {
+      res += `${key}:${object[key]};`;
+    }
   });
   return res;
 }

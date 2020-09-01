@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Image } from "@tarojs/components";
 import { ImageProps as _ImageProps } from "@tarojs/components/types/Image";
-import Loading from "@Components/loading";
 import Icon from "@Components/icon";
 import "./index.less";
 
@@ -21,9 +20,9 @@ export interface ImageProps extends _ImageProps {
 
 const defaultImageProps: ImageProps = {
   showLoading: true,
-  loading: <Loading type="spinner" />,
+  loadingIcon: "icon-morentu",
   showError: true,
-  error: <Image src="" mode="aspectFill" className="__error__image__" />,
+  errorIcon: "icon-error_img",
 } as ImageProps;
 
 const Component = (props: ImageProps) => {
@@ -50,14 +49,13 @@ const Component = (props: ImageProps) => {
   const [status, setStatus] = useState({
     loading: true,
     error: false,
-    load: false,
   });
   function _onLoad(eve) {
-    setStatus({ ...status, load: true, loading: false });
+    setStatus({ ...status, loading: false });
     onLoad && onLoad(eve);
   }
   function _onError(eve) {
-    setStatus({ load: true, loading: false, error: true });
+    setStatus({ loading: false, error: true });
     onError && onError(eve);
   }
   function getStyle(_style) {
@@ -91,12 +89,16 @@ const Component = (props: ImageProps) => {
       )}
       {showLoading && status.loading && (
         <View className="__image__loading__">
-          {loading ? loading : <Icon type={loadingIcon} size="50rpx" />}
+          {loading ? (
+            loading
+          ) : (
+            <Icon type={loadingIcon as string} size="32px" />
+          )}
         </View>
       )}
       {showError && status.error && (
         <View className="__image__error__">
-          {error ? error : <Icon type={errorIcon} size="50rpx" />}
+          {error ? error : <Icon type={errorIcon as string} size="32px" />}
         </View>
       )}
     </View>

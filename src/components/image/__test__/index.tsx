@@ -10,6 +10,9 @@ const TestImage = () => {
         <Image src="https://file.zhen22.com/weapp/default-news.png" />
       </View>
       <View className="align-center">
+        <Image src="https://file.zhen22.com/weapp/default-news.pngs" />
+      </View>
+      <View className="align-center">
         <Image round src="https://file.zhen22.com/weapp/default-news.png" />
       </View>
       <View className="align-center">

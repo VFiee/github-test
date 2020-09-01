@@ -51,8 +51,14 @@
       "@THook": [
         "src/test/hook/index.tsx"
       ],
+      "@Assets/*": [
+        "src/assets/images/*"
+      ],
       "@Images/*": [
         "src/assets/images/*"
+      ],
+      "@Fonts/*": [
+        "src/assets/fonts/*"
       ],
       "@Types/*": [
         "src/types/*"

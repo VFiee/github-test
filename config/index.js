@@ -21,6 +21,8 @@ const config = {
   alias: {
     "@": getPath(),
     "@Util": getPath("util"),
+    "@Assets": getPath("assets"),
+    "@Fonts": getPath("assets/fonts"),
     "@Images": getPath("assets/images"),
     "@Components": getPath("components"),
     "@PageComponents": getPath("page_components"),
