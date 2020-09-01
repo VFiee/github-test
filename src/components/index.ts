@@ -4,7 +4,7 @@ export { default as Blank } from "./empty";
 
 export { default as BottomLine } from "./divider";
 
-export { default as BottomLoading } from "./bottomLoading";
+export { default as BottomLoading } from "./loading";
 
 export { default as Image } from "./image";
 
