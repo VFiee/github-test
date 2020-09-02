@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { View, Image } from "@tarojs/components";
 import { mergeStyle } from "@Util/style";
-import "@/assets/fonts/iconfont/index.less";
 import "./index.less";
 
 export interface IconProps {

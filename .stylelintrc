@@ -6,7 +6,8 @@
     "**/*.svg",
     "**/*.eot",
     "**/*.ttf",
-    "**/*.woff"
+    "**/*.woff",
+    "**/*.woff2"
   ],
   "ignorePath": "src/assets/**/*",
   "font-family-no-missing-generic-family-keyword": [

@@ -1,5 +1,9 @@
 ## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-09-02)
 
+### Bug Fixes
+
+- **stylelint:** fix unexpected missing generic font family for stylelint iconfont ([0c5b74d](https://github.com/VFiee/github-test/commit/0c5b74d6f8f561e38c0e007e5fdc89da3b3483b3))
+
 ### Features
 
 - **component:** 增加 options,使组件受外部 classNameclassName 影响 ([f27efb7](https://github.com/VFiee/github-test/commit/f27efb7bade400072e2e4c1b4d74bdcfcb74cf38))
