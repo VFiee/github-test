@@ -9,9 +9,12 @@
     "**/*.woff"
   ],
   "ignorePath": "src/assets/**/*",
-  "options": {
-    "ignoreFontFamilies": [
-      "iconfont"
-    ]
-  }
+  "font-family-no-missing-generic-family-keyword": [
+    true,
+    {
+      "ignoreValues": [
+        "iconfont"
+      ]
+    }
+  ]
 }

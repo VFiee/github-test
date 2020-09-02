@@ -1,20 +1,20 @@
-/* stylelint-disable */
+@iconfont: "iconfont";
+
 @font-face {
-  font-family: "iconfont";
-  src: url("iconfont.woff?t=1598971651636") format("woff"),
+  font-family: @iconfont;
+  src:
+    url("iconfont.woff?t=1598971651636") format("woff"),
     url("iconfont.ttf?t=1598971651636") format("truetype"),
     url("iconfont.svg?t=1598971651636#iconfont") format("svg"); /* iOS 4.1- */
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: @iconfont;
   font-size: 32px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* stylelint-enable */
 
 .icon-error_img {
   &::before {
