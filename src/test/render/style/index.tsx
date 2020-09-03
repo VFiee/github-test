@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Block, View } from "@tarojs/components";
-// import Divider from "@Components/divider/__test__";
-// import Empty from "@Components/empty/__test__";
-// import Loading from "@Components/loading/__test__";
-// import Icon from "@Components/icon/__test__";
-// import Image from "@Components/image/__test__";
 import "./index.less";
 
-const Border = () => {
+export const Border = () => {
   return (
     <Block>
       <View className="border-item border-top">上边框</View>
@@ -25,7 +20,7 @@ const Border = () => {
   );
 };
 
-const Ellipsis = () => {
+export const Ellipsis = () => {
   return (
     <Block>
       <View className="ellipsis-item ellipsis">
@@ -41,18 +36,24 @@ const Ellipsis = () => {
   );
 };
 
-const Component = () => {
+export const Transition = () => {
+  const [state, setState] = useState("");
+  const setClass = (cls) => {
+    console.log(cls);
+    setState(cls);
+    setTimeout(() => {
+      setState("");
+    }, 2000);
+  };
   return (
     <Block>
-      {/* <Divider /> */}
-      {/* <Empty /> */}
-      {/* <Loading /> */}
-      {/* <Icon /> */}
-      {/* <Image /> */}
-      <Border />
-      <Ellipsis />
+      <View
+        className="transition-item"
+        onClick={() => setClass("animate__fadeIn")}
+      >
+        Slide
+      </View>
+      <View className={`transition-target ${state}`}></View>
     </Block>
   );
 };
-
-export default Component;

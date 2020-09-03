@@ -1,5 +1,5 @@
 import React from "react";
-import Test from "@TRender/render";
+import Test from "@Test/render";
 import NavigationBar from "@Components/navigationBar";
 import "./index.less";
 
