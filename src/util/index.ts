@@ -1,9 +1,14 @@
 import qs from "qs";
 import _ from "lodash";
 import { BaseObject, BaseMap } from "@Types/index";
-import { isObject } from "./base";
+import { getSystemInfoSync } from "./system";
+import { isObject } from "./lodash";
 
-export * from "./base";
+export * from "./lodash";
+
+export * from "./system";
+
+export * from "./style";
 
 /**
  * 获取七牛云图片地址
@@ -21,7 +26,7 @@ export const getImageUrl = (name: string): string =>
  * @returns {Promise} 返回promise
  */
 
-export const promiseify = (fn: (...args) => any, context: any = null) => (
+export const promiseify = (fn: Function, context: any = null): any => (
   args = {}
 ): Promise<any> =>
   new Promise((resolve, reject) => {
@@ -110,3 +115,32 @@ export const mapToObject = (map: BaseMap, initObj?: BaseObject): BaseObject => {
   });
   return res;
 };
+
+/**
+ * 下一次页面渲染前执行的方法
+ * @param {Function} fn 执行的方法
+ *
+ */
+export const nextTick = (fn: Function) => {
+  setTimeout(() => {
+    fn();
+  }, 1000 / 30);
+};
+
+/**
+ * 小程序中模拟requestAnimationFrame
+ * @param {Function} cb 回调函数
+ *
+ */
+export function requestAnimationFrame(cb: Function) {
+  const _systemInfo = getSystemInfoSync();
+  if (_systemInfo.platform === "devtools") {
+    return nextTick(cb);
+  }
+  return Taro.createSelectorQuery()
+    .selectViewport()
+    .boundingClientRect()
+    .exec(() => {
+      cb();
+    });
+}

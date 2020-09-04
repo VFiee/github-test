@@ -13,3 +13,7 @@ export { default as useWhyUpdate } from "./useWhyUpdate";
 export { default as useMenuButton } from "./useMenuButton";
 
 export { default as useSystemInfo } from "./useSystemInfo";
+
+export { default as usePrevious } from "./usePrevious";
+
+export { default as useTransition } from "./useTransition";

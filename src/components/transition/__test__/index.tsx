@@ -1,34 +1,77 @@
 import React, { useState } from "react";
 import { Block, View } from "@tarojs/components";
-import Transition from "../index";
+import Transition, { TransitionType } from "../index";
 import "./index.less";
 
 const TestTransition = () => {
-  const [state, setState] = useState(false);
+  const [type, setType] = useState("fade");
+  const [state, setState] = useState({ show: false, type: "fade" });
   return (
     <Block>
       <View
-        className="toggle-btn"
         onClick={() => {
-          setState(!state);
+          setType(type === "fade" ? "slide" : "fade");
         }}
       >
-        toggle
+        切换类型:{type}
       </View>
-      {/* <Transition name="fade" show={state}>
-        <View className="fade-item"></View>
-      </Transition> */}
-      {/* <Transition name="slideUp" show={state}>
-        <View className="slideUp-item"></View>
-      </Transition> */}
-      {/* <Transition name="slideDown" show={state}>
-        <View className="slideDown-item"></View>
-      </Transition> */}
-      {/* <Transition name="slideLeft" show={state}>
-        <View className="slideLeft-item"></View>
-      </Transition> */}
-      <Transition name="slideRight" show={state}>
-        <View className="slideRight-item"></View>
+      <View
+        className="toggle-btn"
+        onClick={() => {
+          setState({
+            show: !state.show,
+            type: "fade",
+          });
+        }}
+      >
+        fade
+      </View>
+      <View
+        className="toggle-btn"
+        onClick={() => {
+          setState({
+            show: !state.show,
+            type: `${type}Up`,
+          });
+        }}
+      >
+        {`${type}Up`}
+      </View>
+      <View
+        className="toggle-btn"
+        onClick={() => {
+          setState({
+            show: !state.show,
+            type: `${type}Down`,
+          });
+        }}
+      >
+        {`${type}Down`}
+      </View>
+      <View
+        className="toggle-btn"
+        onClick={() => {
+          setState({
+            show: !state.show,
+            type: `${type}Left`,
+          });
+        }}
+      >
+        {`${type}Left`}
+      </View>
+      <View
+        className="toggle-btn"
+        onClick={() => {
+          setState({
+            show: !state.show,
+            type: `${type}Right`,
+          });
+        }}
+      >
+        {`${type}Right`}
+      </View>
+      <Transition name={state.type as TransitionType} show={state.show}>
+        <View className={`${state.type}-item`}></View>
       </Transition>
     </Block>
   );

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { View, Image } from "@tarojs/components";
-import { mergeStyle } from "@Util/style";
+import { mergeStyle } from "@Util/index";
 import "./index.less";
 
 export interface IconProps {

@@ -8,7 +8,7 @@ import {
   reLaunch as _reLaunch,
 } from "@tarojs/taro";
 import AppConfig from "@/app.config";
-import { promiseify } from "@Util/index";
+import { promiseify } from "@/util";
 
 /***************************** Page *************************************/
 
@@ -66,7 +66,7 @@ const promiseRelaunch = promiseify(_reLaunch);
 type RouterOption = {
   url: string;
   events?: {
-    [key: string]: (...args) => any;
+    [key: string]: Function;
   };
 };
 export const navigateTo = (option: RouterOption): Promise<any> => {
@@ -115,6 +115,10 @@ export const switchTab = (url: string): Promise<any> => {
  */
 export const reLaunch = (url: string): Promise<any> => promiseRelaunch({ url });
 
+/**
+ * 关闭所有页面,打开首页
+ * @returns {Promise<any>} 返回Promise
+ */
 export const goToHome = (): Promise<any> => {
   return reLaunch(`/${AppConfig.pages[0]}`);
 };

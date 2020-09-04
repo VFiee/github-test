@@ -3,8 +3,7 @@ import { get } from "lodash";
 import { CoverView, CoverImage, Block } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import useMenuButton, { navigationBarTextStyle } from "@Hooks/useMenuButton";
-import { getImageUrl } from "@Util/index";
-import { getCurrPages, goToHome, navigateBack } from "@Util/system";
+import { getCurrPages, goToHome, navigateBack, getImageUrl } from "@Util/index";
 import "./index.less";
 
 export type IconSrc = {
