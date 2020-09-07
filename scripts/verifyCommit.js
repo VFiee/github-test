@@ -4,7 +4,7 @@ const msgPath = process.env.HUSKY_GIT_PARAMS;
 const msg = require("fs").readFileSync(msgPath, "utf-8").trim();
 
 const releaseRE = /^v\d/;
-const commitRE = /^(revert: )?(feat|fix|docs|dx|refactor|perf|test|workflow|build|ci|chore|types|style|wip|release|deps)(\(.+\))?: .{1,50}/;
+const commitRE = /^(revert: )?(feat|fix|docs|dx|refactor|perf|test|workflow|build|ci|chore|types|style|wip|release|deps|script)(\(.+\))?: .{1,50}/;
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
   console.error(
@@ -13,7 +13,7 @@ if (!releaseRE.test(msg) && !commitRE.test(msg)) {
      ${chalk.red(
        `Proper commit message format is required for automated changelog generation.`
      )}
-    Example:
+     Example:
       ${chalk.green(`feat: add git commit-msg hook`)}
     `
   );
