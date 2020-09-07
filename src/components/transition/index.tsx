@@ -1,7 +1,6 @@
 import React from "react";
-import { useTransition } from "@/hooks";
-import { mergeStyle } from "@/util";
-import "./index.less";
+import { useTransition } from "@Hooks/index";
+import { mergeStyle } from "@Util/index";
 
 export type TransitionType =
   | "fade"

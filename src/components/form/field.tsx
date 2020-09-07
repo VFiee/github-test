@@ -4,7 +4,7 @@ import { get } from "lodash";
 import { View, Text, Label } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import { LabelProps } from "@tarojs/components/types/Label";
-import { useUpdate } from "@/hooks";
+import { useUpdate } from "@Hooks/index";
 import Form from "./_form";
 import Input, { InputProps } from "./input";
 import Radio, { RadioProps } from "./radio";

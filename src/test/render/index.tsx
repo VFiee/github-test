@@ -6,8 +6,8 @@ import { Block } from "@tarojs/components";
 // import Icon from "@Components/icon/__test__";
 // import Image from "@Components/image/__test__";
 // import { Border, Ellipsis, Transition } from "@TRender/style";
-import Transition from "@Components/transition/__test__";
-// import Overlay from "@Components/overlay/__test__";
+// import Transition from "@Components/transition/__test__";
+import Overlay from "@Components/overlay/__test__";
 
 const Component = () => {
   return (
@@ -19,8 +19,8 @@ const Component = () => {
       {/* <Image /> */}
       {/* <Border /> */}
       {/* <Ellipsis /> */}
-      <Transition />
-      {/* <Overlay /> */}
+      {/* <Transition /> */}
+      <Overlay />
     </Block>
   );
 };

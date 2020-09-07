@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import _ from "lodash";
-import { useMount } from "@/hooks";
+import { useMount } from "@Hooks/index";
 import { Picker, View } from "@tarojs/components";
 import { PickerMultiSelectorProps } from "@tarojs/components/types/Picker";
 import { isArray, isEmpty } from "@Util/index";

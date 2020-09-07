@@ -1,3 +1,4 @@
+import { createSelectorQuery } from "@tarojs/taro";
 import qs from "qs";
 import _ from "lodash";
 import { BaseObject, BaseMap } from "@Types/index";
@@ -26,28 +27,26 @@ export const getImageUrl = (name: string): string =>
  * @returns {Promise} 返回promise
  */
 
-export const promiseify = (fn: Function, context: any = null): any => (
-  args = {}
-): Promise<any> =>
+export const promiseify = (fn: Function): any => (args = {}): Promise<any> =>
   new Promise((resolve, reject) => {
-    fn.bind(context)({
+    fn({
       ...args,
       fail: reject,
       success: resolve,
     });
   });
 
-type RouterData = {
-  url: string;
-  query: string;
-  params: BaseObject;
-};
 /**
  *
  * @param {string} url 获取参数的URL
  * @param {BaseObject} params 追加的参数对象
  * @returns {RouterData} 返回一个包含[无参数URL字符串]和[拼接参数字符串]以及[参数对象]的对象
  */
+type RouterData = {
+  url: string;
+  query: string;
+  params: BaseObject;
+};
 export const getRouterParams = (
   url: string,
   params: BaseObject = {}
@@ -137,7 +136,7 @@ export function requestAnimationFrame(cb: Function) {
   if (_systemInfo.platform === "devtools") {
     return nextTick(cb);
   }
-  return Taro.createSelectorQuery()
+  return createSelectorQuery()
     .selectViewport()
     .boundingClientRect()
     .exec(() => {

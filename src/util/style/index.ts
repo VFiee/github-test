@@ -1,7 +1,6 @@
 import { kebabCase } from "lodash";
 
 type Style = string | React.CSSProperties | undefined;
-type StyleResult = string | React.CSSProperties;
 
 function objectToString(style: Style): string {
   if (style == null) {
@@ -16,10 +15,7 @@ function objectToString(style: Style): string {
   return res;
 }
 
-export function mergeStyle(
-  baseStyles: Style,
-  mergeStyles?: Style
-): StyleResult {
+export function mergeStyle(baseStyles: Style, mergeStyles?: Style): string {
   baseStyles = objectToString(baseStyles);
   mergeStyles = objectToString(mergeStyles);
   return baseStyles + mergeStyles;

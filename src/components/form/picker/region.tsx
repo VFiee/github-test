@@ -2,7 +2,7 @@ import React from "react";
 import { Picker, View } from "@tarojs/components";
 import { PickerRegionProps } from "@tarojs/components/types/Picker";
 import { ViewProps } from "@tarojs/components/types/View";
-import { isFunction, isEmpty } from "@/util";
+import { isFunction, isEmpty } from "@Util/index";
 import { BaseField } from "../field";
 import "./index.less";
 

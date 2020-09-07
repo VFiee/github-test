@@ -1,4 +1,4 @@
-import { getImageUrl } from "@/util";
+import { getImageUrl } from "@Util/index";
 import React from "react";
 import Icon from "../index";
 

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Block, View } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import Overlay from "../index";
 import "./index.less";
 
 const TestOverlay = () => {
   const [show, setState] = useState(false);
-  console.log(`state:`, show);
-
   return (
-    <Block>
+    <View className="wrap">
       <View className="toggle" onClick={() => setState(!show)}>
         {show ? "隐藏" : "显示"}
       </View>
@@ -28,7 +26,7 @@ const TestOverlay = () => {
           123123123
         </View>
       </Overlay>
-    </Block>
+    </View>
   );
 };
 

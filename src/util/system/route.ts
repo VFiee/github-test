@@ -8,7 +8,15 @@ import {
   reLaunch as _reLaunch,
 } from "@tarojs/taro";
 import AppConfig from "@/app.config";
-import { promiseify } from "@/util";
+
+const promiseify = (fn: Function): any => (args = {}): Promise<any> =>
+  new Promise((resolve, reject) => {
+    fn({
+      ...args,
+      fail: reject,
+      success: resolve,
+    });
+  });
 
 /***************************** Page *************************************/
 
