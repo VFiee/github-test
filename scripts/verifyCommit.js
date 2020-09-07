@@ -8,14 +8,14 @@ const commitRE = /^(revert: )?(feat|fix|docs|dx|refactor|perf|test|workflow|buil
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
   console.error(
-    `${chalk.bgRed.white(`ERROR`)} ${chalk.red(
-      `invalid commit message format.`
-    )}
-        ${chalk.red(
-          `Proper commit message format is required for automated changelog generation.`
-        )}
+    `${chalk.bgRed.white(`COMMIT ERROR`)} 
+     ${chalk.red(`Invalid commit message format ---> ${msg}`)}
+     ${chalk.red(
+       `Proper commit message format is required for automated changelog generation.`
+     )}
     Example:
-      ${chalk.green(`feat: add git commit-msg hook`)}`
+      ${chalk.green(`feat: add git commit-msg hook`)}
+    `
   );
   process.exit(1);
 }

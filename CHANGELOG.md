@@ -1,4 +1,4 @@
-## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-09-04)
+## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-09-07)
 
 ### Bug Fixes
 
@@ -10,6 +10,7 @@
 - **component:** 增加 options,使组件受外部 classNameclassName 影响 ([f27efb7](https://github.com/VFiee/github-test/commit/f27efb7bade400072e2e4c1b4d74bdcfcb74cf38))
 - **component:** 完善 image 组件,新增 icon 组件 ([f0f8a51](https://github.com/VFiee/github-test/commit/f0f8a513419cc267b778238abc9c4bff03d1bca4))
 - **icon:** update iconfont ([57fe6ab](https://github.com/VFiee/github-test/commit/57fe6ab7eafe1c9017811d9096c384f637ae0f37))
+- **Transition:** refactor transitioni component ([af8b6f1](https://github.com/VFiee/github-test/commit/af8b6f1ca7421858e2fa751dd4fc14578f5d357a))
 - add multiSelector component ([c6f975f](https://github.com/VFiee/github-test/commit/c6f975fe0296b124074218a29fb2150d84a0653c))
 - add picker region component ([597c925](https://github.com/VFiee/github-test/commit/597c925bd2c3a3fa4e34986394dcba7a5debe735))
 - add time&date picker component ([e7b03b4](https://github.com/VFiee/github-test/commit/e7b03b49ec37dc932afe6d7d84c146eebb907f3c))
