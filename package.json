@@ -1,86 +1,80 @@
 {
-	"name": "taro-next",
-	"version": "1.0.12",
-	"private": true,
-	"description": "taro-next",
-	"templateInfo": {
-		"name": "default-youshu",
-		"typescript": true,
-		"css": "less"
-	},
-	"scripts": {
-		"build:weapp": "taro build --type weapp",
-		"build:swan": "taro build --type swan",
-		"build:alipay": "taro build --type alipay",
-		"build:tt": "taro build --type tt",
-		"build:qq": "taro build --type qq",
-		"dev:weapp": "npm run build:weapp -- --watch",
-		"dev:swan": "npm run build:swan -- --watch",
-		"dev:alipay": "npm run build:alipay -- --watch",
-		"dev:tt": "npm run build:tt -- --watch",
-		"dev:qq": "npm run build:qq -- --watch",
-		"update:taro": "taro update self && taro update project && yarn",
-		"lint": "eslint src --max-warnings 0",
-		"lint:style": "stylelint src --fix && git add .",
-		"prettier": "prettier src --write  && git add .",
-		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && prettier CHANGELOG.md --write && git add CHANGELOG.md"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged && yarn changelog",
-			"commit-msg": "node scripts/verifyCommit.js && yarn version"
-		}
-	},
-	"lint-staged": {
-		"*.{js,ts}": [
-			"yarn lint",
-			"yarn prettier"
-		],
-		"*.{css,less}": "yarn lint:style",
-		"*.{less,md}": "yarn prettier"
-	},
-	"browserslist": [
-		"last 3 versions",
-		"Android >= 4.1",
-		"ios >= 8"
-	],
-	"author": "vyron",
-	"dependencies": {
-		"@babel/runtime": "^7.7.7",
-		"@tarojs/components": "3.0.9",
-		"@tarojs/react": "3.0.9",
-		"@tarojs/runtime": "3.0.9",
-		"@tarojs/taro": "3.0.9",
-		"dayjs": "^1.8.34",
-		"qs": "^6.9.4",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"sr-sdk-wxapp": "^1.3.6"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.8.0",
-		"@tarojs/mini-runner": "3.0.9",
-		"@tarojs/webpack-runner": "3.0.9",
-		"@types/qs": "^6.9.4",
-		"@types/react": "^16.0.0",
-		"@types/webpack-env": "^1.13.6",
-		"@typescript-eslint/eslint-plugin": "^3.9.0",
-		"@typescript-eslint/parser": "^3.9.0",
-		"babel-preset-taro": "3.0.9",
-		"chalk": "^4.1.0",
-		"conventional-changelog": "^3.1.23",
-		"eslint": "^7.7.0",
-		"eslint-config-prettier": "^6.11.0",
-		"eslint-config-taro": "3.0.9",
-		"eslint-plugin-import": "^2.12.0",
-		"eslint-plugin-react": "^7.8.2",
-		"eslint-plugin-react-hooks": "^1.6.1",
-		"husky": ">=4",
-		"lint-staged": "^10.2.11",
-		"mrm": "^2.3.4",
-		"prettier": "^2.0.5",
-		"stylelint": "^13.6.1",
-		"stylelint-config-standard": "^20.0.0",
-		"typescript": "^3.7.0"
-	}
+  "name": "taro-next",
+  "version": "1.0.12",
+  "private": true,
+  "description": "taro-next",
+  "templateInfo": {
+    "name": "default-youshu",
+    "typescript": true,
+    "css": "less"
+  },
+  "scripts": {
+    "dev": "yarn build -- --watch",
+    "build": "taro build --type $npm_package_taro_platform",
+    "platform": "node scripts/changePlatform.js",
+    "update:taro": "taro update self && taro update project && yarn",
+    "lint": "eslint src --max-warnings 0",
+    "lint:style": "stylelint src --fix && git add .",
+    "prettier": "prettier src --write  && git add .",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && prettier CHANGELOG.md --write && git add CHANGELOG.md"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn changelog",
+      "commit-msg": "node scripts/verifyCommit.js && yarn version"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "yarn lint",
+      "yarn prettier"
+    ],
+    "*.{css,less}": "yarn lint:style",
+    "*.{less,md}": "yarn prettier"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "author": "vyron",
+  "dependencies": {
+    "@babel/runtime": "^7.7.7",
+    "@tarojs/components": "3.0.9",
+    "@tarojs/react": "3.0.9",
+    "@tarojs/runtime": "3.0.9",
+    "@tarojs/taro": "3.0.9",
+    "dayjs": "^1.8.34",
+    "qs": "^6.9.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "sr-sdk-wxapp": "^1.3.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@tarojs/mini-runner": "3.0.9",
+    "@tarojs/webpack-runner": "3.0.9",
+    "@types/qs": "^6.9.4",
+    "@types/react": "^16.0.0",
+    "@types/webpack-env": "^1.13.6",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "babel-preset-taro": "3.0.9",
+    "chalk": "^4.1.0",
+    "conventional-changelog": "^3.1.23",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-taro": "3.0.9",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "husky": ">=4",
+    "lint-staged": "^10.2.11",
+    "mrm": "^2.3.4",
+    "prettier": "^2.0.5",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^20.0.0",
+    "typescript": "^3.7.0"
+  },
+  "taro_platform": "weapp"
 }
