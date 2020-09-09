@@ -9,21 +9,23 @@ export interface IconProps {
   color?: string;
   className?: string;
   fontFamily?: string;
-  style?: React.CSSProperties;
   localImage?: boolean;
+  style?: React.CSSProperties | string;
   children?: string | React.ReactElement;
 }
 
+const defaultIconProps = {
+  size: "32rpx",
+  color: "#000",
+  className: "",
+  fontFamily: "iconfont",
+};
+
 const Icon = (props: IconProps) => {
-  const {
-    type = "",
-    size,
-    color,
-    style,
-    localImage,
-    className = "",
-    fontFamily = "iconfont",
-  } = props;
+  const { type, size, color, style, localImage, className, fontFamily } = {
+    ...defaultIconProps,
+    ...props,
+  };
   const isImage = localImage || type.indexOf("/") !== -1;
   const mergedStyle = useMemo(
     () =>

@@ -1,23 +1,20 @@
-import React, { ReactElement, useState } from "react";
+import React, { useState } from "react";
 import _ from "lodash";
 import {
   Swiper,
   SwiperItem,
   View,
   Text,
-  Image,
   StandardProps,
 } from "@tarojs/components";
 import { SwiperProps } from "@tarojs/components/types/Swiper";
 import { SwiperItemProps } from "@tarojs/components/types/SwiperItem";
-import EImage from "@Components/image";
+import Image from "@Components/image";
 import { BaseObject } from "@Components/type";
-import { getImageUrl } from "@Util/index";
+import { mergeStyle, isEmpty, compactUndefined } from "@Util/index";
 import "./index.less";
 
 export type IndicatorType = "dots" | "numbers";
-
-export type CarouselData = BaseObject[];
 
 export type IndicatorPosition =
   | "topLeft"
@@ -38,6 +35,7 @@ export interface CustomIndicatorProps {
   dotActiveLine?: boolean;
   indicatorType?: IndicatorType;
   indicatorPosition?: IndicatorPosition;
+  wrapperClassName?: string;
 }
 
 interface IndicatorProps extends StandardProps {
@@ -51,52 +49,41 @@ interface IndicatorProps extends StandardProps {
   indicatorPosition?: IndicatorPosition;
 }
 
-export interface ExtendSwiperProps extends CustomIndicatorProps, SwiperProps {}
-
-export interface ExtendSwiperItemProps extends SwiperItemProps {
-  extra?: (...args) => ReactElement;
-}
-
 interface ExtendSwiperItemPropsWithData extends ExtendSwiperItemProps {
   data: BaseObject;
-}
-
-export interface CarouselProps {
-  data?: CarouselData;
-  children?: ReactElement;
-  swiperPorps?: ExtendSwiperProps;
-  swiperItemProps?: ExtendSwiperItemProps;
-  extra?: (...args) => ReactElement;
 }
 
 const IndicatorDots = (props: IndicatorProps) => {
   const {
     data,
+    style,
     current,
-    style = {},
-    wrapperClassName,
-    className = "",
+    className,
     dotActiveLine,
-    indicatorActiveColor,
     indicatorColor,
+    wrapperClassName,
+    indicatorActiveColor,
     ...restProps
   } = props;
   return (
     <View className={wrapperClassName}>
       {data.map((__, index) => {
         const isCurrent: boolean = index === current;
-        const mergeStyle = {
-          ...(style as React.CSSProperties),
+        const _style = mergeStyle(style, {
           backgroundColor: isCurrent ? indicatorActiveColor : indicatorColor,
-        };
+        });
         return (
           <View
             {...restProps}
             key={index}
-            style={mergeStyle}
-            className={`_dot ${
-              isCurrent && dotActiveLine ? "_dot_active_line" : ""
-            } ${className}`}
+            style={_style}
+            className={`__dot__ ${
+              isCurrent
+                ? `__dot__active__ ${
+                    dotActiveLine ? "__dot__active__line__" : ""
+                  }`
+                : ""
+            } ${className ?? ""}`}
           ></View>
         );
       })}
@@ -104,36 +91,37 @@ const IndicatorDots = (props: IndicatorProps) => {
   );
 };
 const IndicatorNumber = (props: IndicatorProps) => {
-  const {
-    data,
-    current,
-    wrapperClassName,
-    className = "",
-    ...restProps
-  } = props;
-  const extraText = _.get(data, `[${current}].__text`, "");
+  const { data, current, className, wrapperClassName, ...restProps } = props;
+  const extraText = _.get(data, `[${current}]._text`, "");
   return (
     <View className={wrapperClassName}>
-      <View {...restProps} className={`_numbers ${className}`}>
+      <View {...restProps} className={`__numbers__ ${className ?? ""}`}>
         <Text>
           {current + 1}/{data.length}
         </Text>
-        {!!extraText && (
-          <Text className="_numbers_extra_text">{extraText}</Text>
+        {extraText.length > 0 && (
+          <Text className="__extra__text__">{extraText}</Text>
         )}
       </View>
     </View>
   );
 };
-
+const defaultIndicator = {
+  indicatorType: "dots",
+  indicatorPosition: "bottomCenter",
+  indicatorColor: "rgba(0, 0, 0, .3)",
+  indicatorActiveColor: "#000000",
+};
 const Indicator = (props: IndicatorProps) => {
   const {
-    indicatorType = "dots",
-    indicatorPosition = "bottomCenter",
-    indicatorActiveColor,
-    indicatorColor,
+    indicatorType,
+    indicatorPosition,
+    wrapperClassName = "",
     ...restProps
-  } = props;
+  } = {
+    ...defaultIndicator,
+    ...compactUndefined(props),
+  };
   const IndicatorComponent = _.get(
     {
       dots: IndicatorDots,
@@ -145,9 +133,7 @@ const Indicator = (props: IndicatorProps) => {
   return (
     <IndicatorComponent
       {...restProps}
-      indicatorColor={indicatorColor || "rgba(0, 0, 0, .3)"}
-      indicatorActiveColor={indicatorActiveColor || "#000000"}
-      wrapperClassName={`_indicator ${indicatorPosition}`}
+      wrapperClassName={`__indicator__ __indicator__${indicatorPosition} ${wrapperClassName}`}
     />
   );
 };
@@ -159,92 +145,94 @@ const CarouselItem = (props: ExtendSwiperItemPropsWithData) => {
     <SwiperItem
       {...restProps}
       key={data.id}
-      className={`_swiper_item ${className}`}
+      className={`__swiper__item__ ${className}`}
       onClick={onClick?.bind(null, data)}
     >
-      <View className="_content">
-        <EImage
+      <View className="__content__">
+        <Image
           src={src}
           mode="aspectFit"
-          className="_carousel_img"
-          error={<Image mode="aspectFit" src={getImageUrl("lunbo")} />}
+          errorIcon="icon-error_img"
+          className="__carousel__img__"
         />
       </View>
-      {!!extra && extra(data)}
+      {extra?.(data)}
     </SwiperItem>
   );
 };
 
+export interface ExtendSwiperProps extends CustomIndicatorProps, SwiperProps {}
+
+export interface ExtendSwiperItemProps extends SwiperItemProps {
+  extra?: (data?: BaseObject) => React.ReactElement;
+}
+export type CarouselData = BaseObject[];
+export interface CarouselProps {
+  data: CarouselData;
+  style?: React.CSSProperties | string;
+  className?: string;
+  children?: React.ReactElement;
+  swiperProps?: ExtendSwiperProps;
+  swiperItemProps?: ExtendSwiperItemProps;
+  extra?: React.ReactElement;
+}
 const Carousel = (props: CarouselProps) => {
   const {
-    extra,
     data,
-    children,
-    swiperPorps = {},
-    swiperItemProps = {},
+    style = "",
+    className = "",
+    swiperProps = {},
+    swiperItemProps,
   } = props;
   const {
-    style,
-    onClick,
-    className = "",
-    indicatorType,
-    customIndicator,
-    dotActiveLine,
-    indicatorPosition,
-    indicatorColor,
-    indicatorActiveColor,
     onChange,
-    onTransition,
-    onAnimationFinish,
-    ...restProps
-  } = swiperPorps;
-  const fnProps = { onChange, onTransition, onAnimationFinish };
-  const carouselData = (!_.isEmpty(data) ? data : [{}]) as CarouselData;
-  const [current, setCurrent] = useState(swiperPorps?.current || 0);
-  const indicatorProps = {
-    current,
-    indicatorType,
     customIndicator,
+    onClick,
     dotActiveLine,
+    wrapperClassName,
+    indicatorType,
     indicatorPosition,
-    indicatorColor,
-    indicatorActiveColor,
-    data: carouselData,
-  };
+    ...restProps
+  } = swiperProps;
+  const carouselData = (!isEmpty(data) ? data : [{}]) as CarouselData;
+  const [current, setCurrent] = useState(swiperProps?.current ?? 0);
   const onSwiperChange = (eve) => {
     setCurrent(eve.detail.current);
     onChange?.call(null, eve);
   };
   return (
-    <View className={`_swiper-wrap ${className}`} style={style}>
+    <View className={`__carousel__ ${className}`} style={style}>
       <Swiper
-        {...fnProps}
         {...restProps}
+        current={current}
         onChange={onSwiperChange}
-        indicatorColor={indicatorColor}
-        indicatorDots={!customIndicator}
-        className={`_carousel ${className}`}
-        indicatorActiveColor={indicatorActiveColor}
+        indicatorDots={!customIndicator && carouselData.length > 1}
+        className={`__swiper__ ${swiperProps?.className ?? ""}`}
       >
-        {carouselData.map((item, index) => {
-          return (
-            <CarouselItem
-              {...swiperItemProps}
-              key={index}
-              data={item}
-              onClick={onClick}
-            />
-          );
-        })}
+        {carouselData.map((item, index) => (
+          <CarouselItem
+            {...swiperItemProps}
+            key={index}
+            data={item}
+            onClick={onClick}
+          />
+        ))}
       </Swiper>
-      {!!extra &&
-        extra({
-          data,
-          ...fnProps,
-        })}
-      {!!children && children}
-      {!!customIndicator && carouselData.length > 1 && (
-        <Indicator {...indicatorProps} />
+      {props?.extra}
+      {props?.children}
+      {!!(customIndicator && carouselData.length > 1) && (
+        <Indicator
+          {...{
+            current,
+            dotActiveLine,
+            indicatorType,
+            wrapperClassName,
+            indicatorPosition,
+            data: carouselData,
+            indicatorColor: swiperProps?.indicatorColor,
+            indicatorActiveColor: swiperProps?.indicatorActiveColor,
+          }}
+        />
       )}
     </View>
   );

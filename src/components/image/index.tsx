@@ -19,6 +19,7 @@ export interface ImageProps extends _ImageProps {
 }
 
 const defaultImageProps: ImageProps = {
+  src: "",
   showLoading: true,
   loadingIcon: "icon-morentu",
   showError: true,
@@ -41,17 +42,18 @@ const Component = (props: ImageProps) => {
     onError,
     className,
     style,
+    src,
     ...restProps
   } = {
     ...defaultImageProps,
     ...props,
   };
   const [status, setStatus] = useState({
-    loading: true,
-    error: false,
+    loading: !!src,
+    error: !src,
   });
   function _onLoad(eve) {
-    setStatus({ ...status, loading: false });
+    setStatus({ loading: false, error: false });
     onLoad && onLoad(eve);
   }
   function _onError(eve) {
@@ -72,6 +74,7 @@ const Component = (props: ImageProps) => {
           ...(style as React.CSSProperties),
         };
   }
+
   return (
     <View
       className={`__image__ ${round ? `__image__round__` : ""} ${
@@ -82,6 +85,7 @@ const Component = (props: ImageProps) => {
       {!status.error && (
         <Image
           {...restProps}
+          src={src}
           onLoad={_onLoad}
           onError={_onError}
           className="__image__origin__"

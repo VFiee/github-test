@@ -8,7 +8,8 @@ import { Block } from "@tarojs/components";
 // import { Border, Ellipsis, Transition } from "@TRender/style";
 // import Transition from "@Components/transition/__test__";
 // import Overlay from "@Components/overlay/__test__";
-import Authorize from "@Components/Authorize/__test__";
+// import Authorize from "@Components/Authorize/__test__";
+import Carousel from "@Components/carousel/__test__";
 
 const Component = () => {
   return (
@@ -22,7 +23,8 @@ const Component = () => {
       {/* <Ellipsis /> */}
       {/* <Transition /> */}
       {/* <Overlay /> */}
-      <Authorize />
+      {/* <Authorize /> */}
+      <Carousel />
     </Block>
   );
 };
