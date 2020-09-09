@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { getSystemInfoSync } from "@tarojs/taro";
-import useMount from "../useMount";
+import { getSystemInfoSync } from "@Util/index";
+import { useMount } from "@Hooks/index";
 
 const useSystemInfo = () => {
   const sysRef = useRef(getSystemInfoSync());

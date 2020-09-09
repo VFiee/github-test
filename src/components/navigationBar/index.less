@@ -1,13 +1,18 @@
-._appbar_wrapper {
+.__appbar__ {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  ._appbar_right {
+  .__right__menu__ {
     visibility: hidden;
+    opacity: 0;
+
+    &hidden__ {
+      display: none;
+    }
   }
 
-  ._appbar_title {
+  &title__ {
     flex: 1;
     text-align: center;
     font-size: 32px;
@@ -20,12 +25,20 @@
     padding: 0 10px;
   }
 
-  ._menu_bar {
+  .__left__menu__ {
     display: flex;
     justify-content: space-around;
     align-items: center;
 
-    ._menu_img_wrap {
+    &hidden__ {
+      display: none;
+    }
+
+    .__delimiter__ {
+      transform: scaleX(0.5);
+    }
+
+    .__menu__item__wrap__ {
       flex: 1;
       display: flex;
       justify-content: center;
@@ -47,9 +60,6 @@
           width: 34px;
           height: 34px;
         }
-        // &.white {
-        //   filter: invert(100%) brightness(20);
-        // }
       }
     }
   }

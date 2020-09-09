@@ -24,6 +24,7 @@ type CurrentPage = {
   pages: Page[];
   current: Page;
   isFirst: boolean;
+  isTabBar: boolean;
   isRootPage: boolean;
 };
 /**
@@ -42,6 +43,7 @@ export const getCurrPages = (): CurrentPage => {
   return {
     pages,
     current,
+    isTabBar: isTabBar(current),
     isFirst: pages.length === 1,
     isRootPage: isRootPage(current),
   };
@@ -51,11 +53,23 @@ export const getCurrPages = (): CurrentPage => {
  *
  * 判断页面是否为小程序tabBar页面
  *
- * @param page Page对象
+ * @param {Page} page Page对象
  * @returns {boolean} Page是否为tabBar页面
  */
+export const isTabBar = (page: Page): boolean => {
+  // @ts-ignore
+  const tabbarPages = AppConfig?.tabbar?.list ?? [];
+  return tabbarPages.some((_page) => _page?.pagePath === page.route);
+};
+
+/**
+ *
+ * @param {Page} page Page对象
+ * @returns {boolean} Page是否为首页
+ *
+ */
 export const isRootPage = (page: Page): boolean =>
-  AppConfig.pages.includes(page.route);
+  AppConfig.pages[0] === page.route;
 
 /****************************** Router ***********************************/
 const promiseNavigateTo = promiseify(_navigateTo);

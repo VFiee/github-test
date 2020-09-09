@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
-import { View, Image } from "@tarojs/components";
+import { View, Image, CoverView, CoverImage } from "@tarojs/components";
 import { mergeStyle } from "@Util/index";
 import "./index.less";
 
 export interface IconProps {
+  isCover?: boolean;
   type: string;
   size?: string;
   color?: string;
@@ -15,14 +16,23 @@ export interface IconProps {
 }
 
 const defaultIconProps = {
+  isCover: false,
   size: "32rpx",
   color: "#000",
-  className: "",
   fontFamily: "iconfont",
 };
 
 const Icon = (props: IconProps) => {
-  const { type, size, color, style, localImage, className, fontFamily } = {
+  const {
+    type,
+    size,
+    color,
+    style,
+    localImage,
+    className,
+    fontFamily,
+    isCover,
+  } = {
     ...defaultIconProps,
     ...props,
   };
@@ -38,22 +48,25 @@ const Icon = (props: IconProps) => {
       ),
     [style, color, size]
   );
+  const CView = isCover ? CoverView : View;
+  const CImage = isCover ? CoverImage : Image;
   return (
-    <View
+    <CView
       style={mergedStyle}
-      className={`__icon__ ${
-        isImage ? `__icon__image__` : fontFamily
-      } ${type} ${className}`}
+      className={`__icon__ ${isImage ? `__icon__image__` : fontFamily} ${
+        isImage ? "" : type
+      } ${className ?? ""}`}
     >
       {isImage && (
-        <Image
+        <CImage
           src={type}
+          // @ts-ignore
           mode="aspectFill"
           className="__icon__origin__image__"
         />
       )}
       {props.children}
-    </View>
+    </CView>
   );
 };
 Icon.options = {

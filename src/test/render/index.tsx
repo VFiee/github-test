@@ -9,7 +9,8 @@ import { Block } from "@tarojs/components";
 // import Transition from "@Components/transition/__test__";
 // import Overlay from "@Components/overlay/__test__";
 // import Authorize from "@Components/Authorize/__test__";
-import Carousel from "@Components/carousel/__test__";
+// import Carousel from "@Components/carousel/__test__";
+import NavigationBar from "@Components/navigationBar/__test__";
 
 const Component = () => {
   return (
@@ -24,7 +25,8 @@ const Component = () => {
       {/* <Transition /> */}
       {/* <Overlay /> */}
       {/* <Authorize /> */}
-      <Carousel />
+      {/* <Carousel /> */}
+      <NavigationBar />
     </Block>
   );
 };

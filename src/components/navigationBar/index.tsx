@@ -1,178 +1,216 @@
-import React, { CSSProperties } from "react";
-import { get } from "lodash";
-import { CoverView, CoverImage, Block } from "@tarojs/components";
+import React from "react";
+import { CoverView } from "@tarojs/components";
+import Icon, { IconProps } from "@Components/icon";
 import { ViewProps } from "@tarojs/components/types/View";
 import useMenuButton, { navigationBarTextStyle } from "@Hooks/useMenuButton";
-import { getCurrPages, goToHome, navigateBack, getImageUrl } from "@Util/index";
+import {
+  getCurrPages,
+  goToHome,
+  navigateBack,
+  mergeStyle,
+  getImageUrl,
+} from "@Util/index";
+// 图片
+// import BackBlack from "./icons/back-black-icon.png";
+// import BackWhite from "./icons/back-white-icon.png";
+// import HomeBlack from "./icons/home-black-icon.png";
+// import HomeWhite from "./icons/home-white-icon.png";
+// import MenuBlack from "./icons/menu-black-icon.png";
+// import MenuWhite from "./icons/menu-white-icon.png";
+
 import "./index.less";
 
-export type IconSrc = {
-  white: string;
-  black: string;
-};
-
-export interface BaseProps extends ViewProps {
-  style?: CSSProperties;
-  src?: IconSrc;
+export interface leftIconProps extends ViewProps {
+  home?: IconProps;
+  back?: IconProps;
 }
 
-type LeftIconProps = {
-  back?: IconSrc;
-  home?: IconSrc;
-};
-
-export interface LeftPorps extends ViewProps {
-  style?: CSSProperties;
-  src?: LeftIconProps;
+export interface RightIconProps extends ViewProps {
+  icon?: IconProps;
 }
 
-export interface TitleProps extends BaseProps {
+export interface TitleProps extends ViewProps {
   text?: string;
 }
 
-export type MenuClickEvent = (...args) => any;
-
 export interface NavigationBarProps extends ViewProps {
   title?: string | TitleProps;
-  type?: navigationBarTextStyle;
   backgroundColor?: string;
-  left?: MenuClickEvent | LeftPorps;
-  middle?: MenuClickEvent | BaseProps;
-  right?: MenuClickEvent | BaseProps;
+  statusBarBackgroundColor?: string;
+  type?: navigationBarTextStyle;
+  left?: Function | leftIconProps;
+  middle?: Function | ViewProps;
+  right?: Function | RightIconProps;
 }
-const getMenuPorps = (
-  props: MenuClickEvent | LeftPorps | BaseProps
-): BaseProps | LeftPorps => {
+const getMenuProps = (
+  props: Function | leftIconProps | RightIconProps
+): ViewProps | leftIconProps => {
   const isFn = typeof props === "function";
-  return (isFn ? { onClick: props } : props) as BaseProps;
+  return (isFn ? { onClick: props } : props) as ViewProps;
 };
 
-const getTitlePorps = (props: string | TitleProps): TitleProps => {
+const getTitleProps = (props: string | TitleProps): TitleProps => {
   return typeof props === "string" ? { text: props } : props;
 };
-
-type IconSrcData = {
-  isHome: boolean;
-  leftSrc: string;
-  rightSrc: string;
-};
-type IconSrcProps = {
-  leftSrc: LeftIconProps;
-  rightSrc: IconSrc;
-};
-
-const defaultTitle: string = "真二网";
-
-const defaultMenuIcon: IconSrcProps = {
-  leftSrc: {
+// const defaultMenuIcon: IconSrcProps = {
+//   leftSrc: {
+//     home: {
+//       black: getImageUrl(`tab-home`),
+//       white: getImageUrl(`tab-home-white`),
+//     },
+//     back: {
+//       black: getImageUrl(`tab-back`),
+//       white: getImageUrl(`tab-back-white`),
+//     },
+//   },
+//   rightSrc: {
+//     white: getImageUrl(`tab-menu-white`),
+//     black: getImageUrl(`tab-menu`),
+//   },
+// };
+const defaultNavigationBarProps = {
+  title: "微信",
+  type: "white",
+  backgroundColor: "#ffffff",
+  // statusBarBackgroundColor: "#ffffff",
+  left: {
     home: {
-      black: getImageUrl(`tab-home`),
-      white: getImageUrl(`tab-home-white`),
+      isCover: true,
+      // localImage: true,
+      type: `tab-home`,
+      style: {
+        width: "34rpx",
+        height: "34rpx",
+      },
+      // type: "icon-home2",
+      // size: "38rpx",
     },
     back: {
-      black: getImageUrl(`tab-back`),
-      white: getImageUrl(`tab-back-white`),
+      isCover: true,
+      localImage: true,
+      type: `tab-back`,
+      style: {
+        width: "18rpx",
+        height: "30rpx",
+      },
+      // type: "icon-back",
+      // size: "42rpx",
     },
   },
-  rightSrc: {
-    white: getImageUrl(`tab-menu-white`),
-    black: getImageUrl(`tab-menu`),
+  right: {
+    icon: {
+      isCover: true,
+      localImage: true,
+      type: `tab-menu`,
+      style: {
+        width: "34rpx",
+        height: "25rpx",
+      },
+      // type: "icon-caidan7",
+      // size: "48rpx",
+    },
   },
 };
+// const iconTypeImage = {
+//   white: {
+//     home: HomeWhite,
+//     back: BackWhite,
+//     menu: MenuWhite,
+//   },
+//   black: {
+//     home: HomeBlack,
+//     back: BackBlack,
+//     menu: MenuBlack,
+//   },
+// };
 
-const getMenuIconSrc = (
-  type: navigationBarTextStyle,
-  props: IconSrcProps
-): IconSrcData => {
-  const { leftSrc = {}, rightSrc = {} } = props;
-  const { isRootPage, isFirst } = getCurrPages();
-  const isHome = isRootPage || isFirst;
-  const srcData = {
-    left: isHome
-      ? { ...defaultMenuIcon.leftSrc.home, ...leftSrc?.home }
-      : { ...defaultMenuIcon.leftSrc.back, ...leftSrc?.back },
-    right: {
-      ...defaultMenuIcon.rightSrc,
-      ...rightSrc,
-    },
-  };
-  return {
-    isHome,
-    leftSrc: get(srcData, `left.${type}`),
-    rightSrc: get(srcData, `right.${type}`),
-  };
-};
 const NavigationBar = (props: NavigationBarProps) => {
-  const { type = "white", backgroundColor, title, left, right, middle } = props;
   const {
-    rect,
-    wrapStyle = {},
-    menuStyle = {},
-    splitLineStyle = {},
-  } = useMenuButton({ type });
+    type,
+    title,
+    left,
+    right,
+    middle,
+    backgroundColor,
+    // statusBarBackgroundColor,
+  } = {
+    ...defaultNavigationBarProps,
+    ...props,
+  };
+  const { rect, wrapStyle, menuStyle, delimiterStyle } = useMenuButton({
+    type: type as navigationBarTextStyle,
+  });
   const { width, height } = menuStyle;
   const { position, zIndex, ...restProps } = wrapStyle;
+  let { isFirst: isHome, isTabBar } = getCurrPages();
+  isHome = true;
   const {
-    style = {},
-    className = "",
-    text = defaultTitle,
+    text,
+    style: titleStyle,
+    className: titleCls,
     ...restTitleProps
-  } = getTitlePorps(title || {});
+  } = getTitleProps(title || {});
   const {
-    className: leftCls = "",
-    src: leftIconSrc,
-    onClick: onLefeMenuClick,
+    home,
+    back,
+    className: leftCls,
+    onClick: onLeftMenuClick,
     ...restLeftProps
-  } = getMenuPorps(left || {});
+  } = getMenuProps(left) as leftIconProps;
   const {
-    className: rightCls = "",
-    src: rightIconSrc,
+    icon,
+    className: rightCls,
     onClick: onRightMenuClick,
     ...restRightProps
-  } = getMenuPorps(right || {});
-  const { className: midCls = "", style: midStyle = {} } = getMenuPorps(
-    middle || {}
+  } = getMenuProps(right) as RightIconProps;
+  const { className: delimiterCls, style: delimiterSty } = getMenuProps(
+    middle ?? {}
   );
-  const { isHome, leftSrc, rightSrc } = getMenuIconSrc(type, {
-    leftSrc: leftIconSrc as LeftIconProps,
-    rightSrc: rightIconSrc as IconSrc,
-  });
+  const _iconProps = isHome ? home : back;
+  const iconProps = {
+    ..._iconProps,
+    // type: iconTypeImage[type][isHome ? "home" : "back"],
+    type: getImageUrl(
+      // @ts-ignore
+      type === "white" ? `${_iconProps?.type}-white` : _iconProps?.type
+    ),
+  } as IconProps;
   return (
-    <Block>
+    <React.Fragment>
       <CoverView
         style={{
           ...wrapStyle,
           backgroundColor,
         }}
-        className="_appbar_wrapper"
+        className="__appbar__"
       >
-        <CoverView style={menuStyle} className="_menu_bar">
+        <CoverView
+          style={menuStyle}
+          className={`__left__menu__ ${
+            isTabBar ? "__left__menu__hidden__" : ""
+          }`}
+        >
           <CoverView
             {...restLeftProps}
-            className={`_menu_img_wrap ${leftCls}`}
+            className={`__menu__item__wrap__ ${leftCls ?? ""}`}
             onClick={(eve) => {
-              isHome ? goToHome() : navigateBack();
-              onLefeMenuClick?.call(
+              onLeftMenuClick?.call(
                 null,
                 { isHome, menuStyle, rect, props: left },
                 eve
               );
+              isHome ? goToHome() : navigateBack();
             }}
           >
-            <CoverImage
-              src={leftSrc}
-              className={`_menu_icon ${isHome ? "home" : "back"}`}
-            />
+            <Icon {...(iconProps as IconProps)} />
           </CoverView>
           <CoverView
-            className={`_menu_split_line ${midCls}`}
-            style={{
-              ...splitLineStyle,
-              ...midStyle,
-            }}
+            className={`__delimiter__ ${delimiterCls ?? ""}`}
+            style={mergeStyle(delimiterStyle, delimiterSty)}
           />
           <CoverView
             {...restRightProps}
+            className={`__menu__item__wrap__ ${rightCls ?? ""}`}
             onClick={(eve) => {
               onRightMenuClick?.call(
                 null,
@@ -180,25 +218,41 @@ const NavigationBar = (props: NavigationBarProps) => {
                 eve
               );
             }}
-            className={`_menu_img_wrap ${rightCls}`}
           >
-            <CoverImage src={rightSrc} className={`_menu_icon menu ${type}`} />
+            <Icon
+              {...{
+                ...(icon as IconProps),
+                // type: iconTypeImage[type]["menu"],
+                type: getImageUrl(
+                  // @ts-ignore
+                  type === "white" ? `${icon?.type}-white` : icon?.type
+                ),
+                // color: type,
+              }}
+            />
           </CoverView>
         </CoverView>
         <CoverView
           {...restTitleProps}
-          className={`_appbar_title ${className}`}
-          style={{
-            color: type === "white" ? "#fff" : "#333",
-            ...style,
-          }}
+          className={`__appbar__title__ ${titleCls ?? ""}`}
+          style={mergeStyle(
+            {
+              color: backgroundColor === "#ffffff" ? "#333" : "#fff",
+            },
+            titleStyle
+          )}
         >
           {text}
         </CoverView>
-        <CoverView style={{ width, height }} className="_appbar_right" />
+        <CoverView
+          style={{ width, height }}
+          className={`__right__menu__ ${
+            isTabBar ? "__right__menu__hidden__" : ""
+          }`}
+        />
       </CoverView>
       <CoverView style={restProps} />
-    </Block>
+    </React.Fragment>
   );
 };
 
