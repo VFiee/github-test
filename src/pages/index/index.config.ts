@@ -1,5 +1,5 @@
 export default {
   navigationBarTitleText: "首页",
-  navigationStyle: "custom",
-  navigationBarTextStyle: "white",
+  // navigationStyle: "custom",
+  // navigationBarTextStyle: "white",
 };

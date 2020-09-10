@@ -50,6 +50,13 @@ const Icon = (props: IconProps) => {
   );
   const CView = isCover ? CoverView : View;
   const CImage = isCover ? CoverImage : Image;
+  let imageProps = {
+    src: type,
+    className: "__icon__origin__image__",
+  };
+  if (isCover) {
+    imageProps["mode"] = "aspectFill";
+  }
   return (
     <CView
       style={mergedStyle}
@@ -57,14 +64,7 @@ const Icon = (props: IconProps) => {
         isImage ? "" : type
       } ${className ?? ""}`}
     >
-      {isImage && (
-        <CImage
-          src={type}
-          // @ts-ignore
-          mode="aspectFill"
-          className="__icon__origin__image__"
-        />
-      )}
+      {isImage && <CImage {...imageProps} />}
       {props.children}
     </CView>
   );
