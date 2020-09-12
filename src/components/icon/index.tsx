@@ -36,7 +36,7 @@ const Icon = (props: IconProps) => {
     ...defaultIconProps,
     ...props,
   };
-  const isImage = localImage || type.indexOf("/") !== -1;
+  const isImage = localImage || (type && type.indexOf("/") !== -1);
   const mergedStyle = useMemo(
     () =>
       mergeStyle(
@@ -54,7 +54,7 @@ const Icon = (props: IconProps) => {
     src: type,
     className: "__icon__origin__image__",
   };
-  if (isCover) {
+  if (!isCover) {
     imageProps["mode"] = "aspectFill";
   }
   return (

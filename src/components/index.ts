@@ -16,7 +16,7 @@ export { default as List } from "./list";
 
 export { default as Loading } from "./loading";
 
-export { default as NavigationBar } from "./navigationBar";
+export { default as AppBar } from "./appbar";
 
 export { default as Overlay } from "./overlay";
 

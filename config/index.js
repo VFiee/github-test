@@ -34,15 +34,18 @@ const config = {
     "@Types": getPath("types"),
   },
   mini: {
+    imageUrlLoaderOption: {
+      limit: 0,
+    },
     postcss: {
       pxtransform: {
         enable: true,
         config: {},
       },
       url: {
-        enable: true,
+        enable: false,
         config: {
-          limit: 10240, // 设定转换尺寸上限
+          limit: 1024, // 设定转换尺寸上限
         },
       },
       cssModules: {
@@ -78,8 +81,11 @@ function getPath(_path) {
 }
 
 module.exports = function (merge) {
+  let _config;
   if (process.env.NODE_ENV === "development") {
-    return merge({}, config, require("./dev"));
+    _config = merge({}, config, require("./dev"));
   }
-  return merge({}, config, require("./prod"));
+  _config = merge({}, config, require("./prod"));
+  console.log(_config);
+  return _config;
 };
