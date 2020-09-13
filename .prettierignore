@@ -1,1 +1,5 @@
 src/assets
+*.png
+*.jpg
+*.svg
+*.webp

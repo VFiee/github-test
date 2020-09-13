@@ -10,7 +10,7 @@ import { Block } from "@tarojs/components";
 // import Overlay from "@Components/overlay/__test__";
 // import Authorize from "@Components/Authorize/__test__";
 // import Carousel from "@Components/carousel/__test__";
-import AppBar from "@/components/appbar/__test__";
+// import AppBar from "@/components/appbar/__test__";
 
 const Component = () => {
   return (
@@ -26,7 +26,7 @@ const Component = () => {
       {/* <Overlay /> */}
       {/* <Authorize /> */}
       {/* <Carousel /> */}
-      <AppBar />
+      {/* <AppBar /> */}
     </Block>
   );
 };

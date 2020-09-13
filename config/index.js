@@ -86,6 +86,5 @@ module.exports = function (merge) {
     _config = merge({}, config, require("./dev"));
   }
   _config = merge({}, config, require("./prod"));
-  console.log(_config);
   return _config;
 };
