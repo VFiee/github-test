@@ -12,6 +12,7 @@
     "dev": "yarn build -- --watch",
     "build": "taro build --type $npm_package_taro_platform",
     "platform": "node scripts/changePlatform.js",
+    "test:component": "node scripts/test/component.js",
     "update:taro": "taro update self && taro update project && yarn",
     "lint": "eslint src --max-warnings 0",
     "lint:style": "stylelint src --fix && git add .",

@@ -1,5 +1,17 @@
 export default {
-  pages: ["pages/index/index"],
+  pages: [
+    "pages/index/index",
+    "pages/appbar/index",
+    "pages/authorize/index",
+    "pages/carousel/index",
+    "pages/divider/index",
+    "pages/empty/index",
+    "pages/icon/index",
+    "pages/image/index",
+    "pages/loading/index",
+    "pages/overlay/index",
+    "pages/transition/index",
+  ],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
@@ -8,7 +20,7 @@ export default {
   },
   permission: {
     "scope.userLocation": {
-      desc: "你的位置信息将用于为您提供对应城市的房源服务", // 高速公路行驶持续后台定位
+      desc: "你的位置信息将用于为您提供对应城市的房源服务",
     },
   },
 };
