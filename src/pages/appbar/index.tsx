@@ -1,21 +1,12 @@
 import React from "react";
-import { AppBar } from "@Components/index";
+import Test from "@Components/appbar/__test__";
 
-const TestNavigationBar = () => {
+function TestPage() {
   return (
     <React.Fragment>
-      <AppBar
-        backgroundColor="#00ab84"
-        type="black"
-        onRightClick={(...args) => {
-          console.log(...args);
-        }}
-        onTitleClick={(eve) => {
-          console.log(eve);
-        }}
-      />
+      <Test />
     </React.Fragment>
   );
-};
+}
 
-export default TestNavigationBar;
+export default TestPage;

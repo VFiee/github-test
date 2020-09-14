@@ -3,7 +3,7 @@ import { Text, Checkbox, Label, CheckboxGroup } from "@tarojs/components";
 import { CheckboxProps } from "@tarojs/components/types/Checkbox";
 import { LabelProps } from "@tarojs/components/types/Label";
 import { CheckboxGroupProps as BaseCheckboxGroupProps } from "@tarojs/components/types/CheckboxGroup";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 
 interface ExtendsCheckboxProps extends CheckboxProps {
   label: string;

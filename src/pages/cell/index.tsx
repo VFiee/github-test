@@ -1,5 +1,5 @@
 import React from "react";
-import Test from "@Components/loading/__test__";
+import Test from "@Components/cell/__test__";
 
 function TestPage() {
   return (

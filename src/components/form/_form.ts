@@ -7,7 +7,7 @@ import {
   isEmpty,
 } from "@Util/index";
 import { BaseObject, BaseMap } from "@/types";
-import { FieldRule } from "./field";
+import { FieldRule } from "./fieldItem";
 
 type FormMethods = "submit" | "reset";
 
@@ -172,7 +172,7 @@ class Form {
           };
           promise = new Promise((resolve, reject) => {
             const isValid = Object.values(validatorResult).every(Boolean);
-            isValid ? resolve() : reject(message);
+            isValid ? resolve(isValid) : reject(message);
           });
         }
         promise

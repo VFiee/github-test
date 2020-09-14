@@ -28,11 +28,35 @@ dirs = dirs.filter((dir) => {
   return false;
 });
 
-function copyDir(src, dist) {
-  exec(`cp -r ${src} ${dist}`);
-  // fs.copyDir(src, dist, (err) => {
-  //   console.log(`copy文件出错:`, err);
-  // });
+const pageTemplate = (name) => {
+  return `import React from "react";
+  import Test from "@Components/${name}/__test__";
+  
+  function TestPage() {
+    return (
+      <React.Fragment>
+        <Test />
+      </React.Fragment>
+    );
+  }
+  
+  export default TestPage;
+  `;
+};
+function linkDir(name, src, dist) {
+  const page = pageTemplate(name);
+  const configPath = `${src}/index.config.ts`;
+  if (!fs.existsSync(dist)) {
+    fs.mkdirSync(dist);
+  }
+  if (fs.existsSync(configPath)) {
+    fs.copyFileSync(configPath, `${dist}/index.config.ts`, (err) => {
+      err && console.log(err);
+    });
+  }
+  fs.writeFileSync(`${dist}/index.tsx`, page, (err) => {
+    err && console.log(err);
+  });
 }
 
 const template = (components) => `import React from "react";
@@ -70,8 +94,7 @@ const configTpl = `export default {
 `;
 
 function generatePage(dir, dirname) {
-  const copyTargetDir = `${pwd}/src/pages/${dirname}`;
-  copyDir(dir, copyTargetDir);
+  linkDir(dirname, dir, `${pwd}/src/pages/${dirname}`);
   addPageIndex(dirs);
 }
 
@@ -123,4 +146,5 @@ function init() {
   initComponentPages();
   logPages();
   prettier();
+  process.exit();
 }

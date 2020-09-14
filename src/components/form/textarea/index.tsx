@@ -1,7 +1,7 @@
 import React from "react";
 import { Textarea } from "@tarojs/components";
 import { TextareaProps } from "@tarojs/components/types/Textarea.d";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 import "../index.less";
 
 interface InternalTextareaProps extends TextareaProps, BaseField {}

@@ -1,35 +1,12 @@
 import React from "react";
-import { Block, View } from "@tarojs/components";
-import { Image } from "@Components/index";
-import "./index.less";
+import Test from "@Components/image/__test__";
 
-const TestImage = () => {
+function TestPage() {
   return (
-    <Block>
-      <View className="align-center">
-        <Image src="https://file.zhen22.com/weapp/default-news.png" />
-      </View>
-      <View className="align-center">
-        <Image src="https://file.zhen22.com/weapp/default-news.pngs" />
-      </View>
-      <View className="align-center">
-        <Image round src="https://file.zhen22.com/weapp/default-news.png" />
-      </View>
-      <View className="align-center">
-        <Image
-          radius="20rpx"
-          src="https://file.zhen22.com/weapp/default-news.png"
-        />
-      </View>
-      <View className="align-center">
-        <Image
-          width="100%"
-          height="500rpx"
-          radius="20rpx"
-          src="https://pic.netbian.com/uploads/allimg/190824/212516-15666531161ade.jpg"
-        />
-      </View>
-    </Block>
+    <React.Fragment>
+      <Test />
+    </React.Fragment>
   );
-};
-export default TestImage;
+}
+
+export default TestPage;

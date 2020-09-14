@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch } from "@tarojs/components";
 import { SwitchProps } from "@tarojs/components/types/Switch.d";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 import "../index.less";
 
 interface InternalSwitchProps extends SwitchProps, BaseField {}

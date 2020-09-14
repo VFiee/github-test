@@ -4,6 +4,7 @@ export default {
     "pages/appbar/index",
     "pages/authorize/index",
     "pages/carousel/index",
+    "pages/cell/index",
     "pages/divider/index",
     "pages/empty/index",
     "pages/icon/index",

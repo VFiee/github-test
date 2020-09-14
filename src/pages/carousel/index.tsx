@@ -1,66 +1,12 @@
 import React from "react";
-import { Carousel } from "@Components/index";
-import { getImageUrl } from "@Util/index";
-import "./index.less";
+import Test from "@Components/carousel/__test__";
 
-const TestCarousel = () => {
+function TestPage() {
   return (
     <React.Fragment>
-      <Carousel data={[]} className="carousel-item" />
-      <Carousel
-        data={[
-          {
-            src: getImageUrl("lunbo"),
-          },
-          {
-            src: getImageUrl("lunbo"),
-          },
-        ]}
-        swiperProps={{
-          indicatorColor: "#f2f2f2",
-          indicatorActiveColor: "#00ab84",
-        }}
-        className="carousel-item"
-      />
-
-      <Carousel
-        data={[
-          {
-            src: getImageUrl("lunbo"),
-          },
-          {
-            src: getImageUrl("lunbo"),
-          },
-        ]}
-        swiperProps={{
-          customIndicator: true,
-          dotActiveLine: true,
-          indicatorColor: "#f2f2f2",
-          indicatorActiveColor: "#00ab84",
-        }}
-        className="carousel-item"
-      />
-
-      <Carousel
-        data={[
-          {
-            src: getImageUrl("lunbo"),
-          },
-          {
-            src: getImageUrl("lunbo"),
-          },
-        ]}
-        swiperProps={{
-          customIndicator: true,
-          indicatorColor: "#f2f2f2",
-          indicatorActiveColor: "#00ab84",
-          indicatorType: "numbers",
-          indicatorPosition: "bottomRight",
-        }}
-        className="carousel-item"
-      />
+      <Test />
     </React.Fragment>
   );
-};
+}
 
-export default TestCarousel;
+export default TestPage;

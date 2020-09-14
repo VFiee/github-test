@@ -9,7 +9,7 @@
     "css": "less"
   },
   "scripts": {
-    "dev": "yarn build -- --watch",
+    "dev": "yarn build --watch",
     "build": "taro build --type $npm_package_taro_platform",
     "platform": "node scripts/changePlatform.js",
     "test:component": "node scripts/test/component.js",

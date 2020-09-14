@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "@tarojs/components";
 import { InputProps } from "@tarojs/components/types/Input.d";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 
 interface InternalInputProps extends InputProps, BaseField {}
 

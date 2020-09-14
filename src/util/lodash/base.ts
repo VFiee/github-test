@@ -152,6 +152,14 @@ export const isArguments = (value: any): boolean => {
 };
 
 /**
+ * 检测当前值是否为Symbol类型
+ * @param {any} value 任意合法值
+ * @returns {boolean} 返回boolean
+ */
+
+export const isSymbol = (value: any): boolean => getTypeof(value) === "Symbol";
+
+/**
  * 检测当前值是否为空
  * @param {any} value 任意合法值
  * @returns {boolean} 返回boolean

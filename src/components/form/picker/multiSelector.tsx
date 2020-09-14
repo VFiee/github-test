@@ -5,7 +5,7 @@ import { Picker, View } from "@tarojs/components";
 import { PickerMultiSelectorProps } from "@tarojs/components/types/Picker";
 import { isArray, isEmpty } from "@Util/index";
 import { CommonPickerProps } from "./selector";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 import "./index.less";
 
 interface CommonMultiSelectorProps {

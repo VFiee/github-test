@@ -1,80 +1,12 @@
-import React, { useState } from "react";
-import { Block, View } from "@tarojs/components";
-import Transition, { TransitionType } from "@Components/transition";
-import "./index.less";
+import React from "react";
+import Test from "@Components/transition/__test__";
 
-const TestTransition = () => {
-  const [type, setType] = useState("fade");
-  const [state, setState] = useState({ show: false, type: "fade" });
+function TestPage() {
   return (
-    <Block>
-      <View
-        onClick={() => {
-          setType(type === "fade" ? "slide" : "fade");
-        }}
-      >
-        切换类型:{type}
-      </View>
-      <View
-        className="toggle-btn"
-        onClick={() => {
-          setState({
-            show: !state.show,
-            type: "fade",
-          });
-        }}
-      >
-        fade
-      </View>
-      <View
-        className="toggle-btn"
-        onClick={() => {
-          setState({
-            show: !state.show,
-            type: `${type}Up`,
-          });
-        }}
-      >
-        {`${type}Up`}
-      </View>
-      <View
-        className="toggle-btn"
-        onClick={() => {
-          setState({
-            show: !state.show,
-            type: `${type}Down`,
-          });
-        }}
-      >
-        {`${type}Down`}
-      </View>
-      <View
-        className="toggle-btn"
-        onClick={() => {
-          setState({
-            show: !state.show,
-            type: `${type}Left`,
-          });
-        }}
-      >
-        {`${type}Left`}
-      </View>
-      <View
-        className="toggle-btn"
-        onClick={() => {
-          setState({
-            show: !state.show,
-            type: `${type}Right`,
-          });
-        }}
-      >
-        {`${type}Right`}
-      </View>
-      <Transition name={state.type as TransitionType} show={state.show}>
-        <View className={`${state.type}-item`}></View>
-      </Transition>
-    </Block>
+    <React.Fragment>
+      <Test />
+    </React.Fragment>
   );
-};
+}
 
-export default TestTransition;
+export default TestPage;

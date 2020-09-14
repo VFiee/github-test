@@ -3,7 +3,7 @@ import qs from "qs";
 import _ from "lodash";
 import { BaseObject, BaseMap } from "@Types/index";
 import { getSystemInfoSync } from "./system";
-import { isObject } from "./lodash";
+import { isObject, isSymbol } from "./lodash";
 
 export * from "./lodash";
 
@@ -144,40 +144,6 @@ export function requestAnimationFrame(cb: Function) {
     });
 }
 
-export function compact(value: [] | object): [] | object {
-  if (Array.isArray(value)) {
-    return value.filter(Boolean);
-  }
-  if (!isObject(value)) return value;
-  let keys = Object.keys(value);
-  if (keys.length <= 0) return value;
-  let res = {};
-  for (let i = 0, len = keys.length; i < len; i++) {
-    let item = value[keys[i]];
-    if (Array.isArray(item) || isObject(item)) {
-      res[keys[i]] = compact(item);
-    } else if (!!item) {
-      res[keys[i]] = item;
-    }
-  }
-  return res;
+export function isReactElement(ele?: any): boolean {
+  return isObject(ele) && isSymbol(ele.$$typeof);
 }
-
-export const compactUndefined = (value: [] | object): [] | object => {
-  if (Array.isArray(value)) {
-    return value.filter((v) => v === void 0);
-  }
-  if (!isObject(value)) return value;
-  let keys = Object.keys(value);
-  if (keys.length <= 0) return value;
-  let res = {};
-  for (let i = 0, len = keys.length; i < len; i++) {
-    let item = value[keys[i]];
-    if (Array.isArray(item) || isObject(item)) {
-      res[keys[i]] = compact(item);
-    } else if (item !== void 0) {
-      res[keys[i]] = item;
-    }
-  }
-  return res;
-};

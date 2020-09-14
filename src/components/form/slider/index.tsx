@@ -1,7 +1,7 @@
 import React from "react";
 import { Slider } from "@tarojs/components";
 import { SliderProps } from "@tarojs/components/types/Slider.d";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 import "../index.less";
 
 interface InternalSliderProps extends SliderProps, BaseField {}

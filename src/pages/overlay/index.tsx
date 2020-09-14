@@ -1,33 +1,12 @@
-import React, { useState } from "react";
-import { View } from "@tarojs/components";
-import { Overlay } from "@Components/index";
-import "./index.less";
+import React from "react";
+import Test from "@Components/overlay/__test__";
 
-const TestOverlay = () => {
-  const [show, setState] = useState(false);
+function TestPage() {
   return (
-    <View className="wrap">
-      <View className="toggle" onClick={() => setState(!show)}>
-        {show ? "隐藏" : "显示"}
-      </View>
-      <Overlay
-        show={show}
-        customAppbar
-        onClick={() => {
-          setState(false);
-        }}
-      >
-        <View
-          onClick={(eve) => {
-            eve.stopPropagation();
-            console.log(1231312312);
-          }}
-        >
-          123123123
-        </View>
-      </Overlay>
-    </View>
+    <React.Fragment>
+      <Test />
+    </React.Fragment>
   );
-};
+}
 
-export default TestOverlay;
+export default TestPage;

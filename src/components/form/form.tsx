@@ -2,10 +2,10 @@ import React, { useImperativeHandle, useRef } from "react";
 import { View } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import { BaseObject } from "@/types";
-import { FieldProps } from "@/components/form/field";
+import { FieldProps } from "@/components/form/fieldItem";
 import { useUpdate } from "@Hooks/index";
 import FormIns from "./_form";
-import Field from "./field";
+import Field from "./fieldItem";
 
 export interface FormProps extends ViewProps {
   name: string;

@@ -17,8 +17,6 @@ export interface IconProps {
 
 const defaultIconProps = {
   isCover: false,
-  size: "32rpx",
-  color: "#000",
   fontFamily: "iconfont",
 };
 
@@ -41,7 +39,7 @@ const Icon = (props: IconProps) => {
     () =>
       mergeStyle(
         {
-          color,
+          color: color ?? "",
           fontSize: size,
         },
         style

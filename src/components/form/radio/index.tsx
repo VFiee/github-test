@@ -3,7 +3,7 @@ import { RadioGroup, Label, Radio, Text } from "@tarojs/components";
 import { LabelProps } from "@tarojs/components/types/Label";
 import { RadioProps as _RadioProps } from "@tarojs/components/types/Radio";
 import { RadioGroupProps } from "@tarojs/components/types/RadioGroup";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 import "../index.less";
 
 interface ExtendsRadioProps extends _RadioProps {

@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import { Authorize } from "@Components/index";
+import React from "react";
+import Test from "@Components/authorize/__test__";
 
-const TestAuthorize = () => {
-  const [isAuthorize, setIsAuthorize] = useState(false);
+function TestPage() {
   return (
     <React.Fragment>
-      <Authorize
-        openType="scope"
-        authScope="userLocation"
-        authorize={isAuthorize}
-        style={{ marginTop: "32rpx" }}
-        onAuthorize={(eve) => {
-          console.log(`onAuthorize :`, eve);
-          setIsAuthorize(true);
-        }}
-      >
-        授权用户信息
-      </Authorize>
+      <Test />
     </React.Fragment>
   );
-};
+}
 
-export default TestAuthorize;
+export default TestPage;

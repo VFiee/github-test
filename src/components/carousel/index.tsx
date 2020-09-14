@@ -11,7 +11,7 @@ import { SwiperProps } from "@tarojs/components/types/Swiper";
 import { SwiperItemProps } from "@tarojs/components/types/SwiperItem";
 import Image from "@Components/image";
 import { BaseObject } from "@Components/type";
-import { mergeStyle, isEmpty, compactUndefined } from "@Util/index";
+import { mergeStyle, isEmpty, compact } from "@Util/index";
 import "./index.less";
 
 export type IndicatorType = "dots" | "numbers";
@@ -120,7 +120,7 @@ const Indicator = (props: IndicatorProps) => {
     ...restProps
   } = {
     ...defaultIndicator,
-    ...compactUndefined(props),
+    ...compact(props, (v) => typeof v === "undefined"),
   };
   const IndicatorComponent = _.get(
     {

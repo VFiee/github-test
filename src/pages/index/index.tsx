@@ -40,6 +40,16 @@ function Index() {
         className="test-item border-top"
         onClick={() =>
           navigateTo({
+            url: "/pages/cell/index",
+          })
+        }
+      >
+        cell
+      </View>
+      <View
+        className="test-item border-top"
+        onClick={() =>
+          navigateTo({
             url: "/pages/divider/index",
           })
         }

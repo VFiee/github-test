@@ -4,7 +4,7 @@ import { Picker, View } from "@tarojs/components";
 import { ViewProps } from "@tarojs/components/types/View";
 import { PickerSelectorProps } from "@tarojs/components/types/Picker";
 import { isObject, isUndefined } from "@Util/index";
-import { BaseField } from "../field";
+import { BaseField } from "../fieldItem";
 import "./index.less";
 
 export interface CommonPickerProps {
