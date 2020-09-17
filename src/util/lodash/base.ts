@@ -1,4 +1,6 @@
-const objectProto = Object.prototype;
+export const objectProto = Object.prototype;
+
+export const hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * @param {any} target 检测的值
@@ -145,7 +147,7 @@ export const isBoolean = (value: any): boolean =>
 export const isArguments = (value: any): boolean => {
   return (
     isObject(value) &&
-    objectProto.hasOwnProperty.call(value, "callee") &&
+    hasOwnProperty.call(value, "callee") &&
     objectProto.propertyIsEnumerable("callee") &&
     isFunction(value.callee)
   );
@@ -179,7 +181,7 @@ export const isEmpty = (value: any): boolean => {
     return !value.size;
   }
   for (const key in value) {
-    if (objectProto.hasOwnProperty.call(value, key)) {
+    if (hasOwnProperty.call(value, key)) {
       return false;
     }
   }

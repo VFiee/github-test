@@ -5,3 +5,5 @@ export type BaseObject = {
 export type CustomElement = React.ReactElement | string;
 
 export type CustomStyle = React.CSSProperties | string;
+
+export type CustomTextAlign = "left" | "center" | "right";

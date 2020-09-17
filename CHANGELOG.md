@@ -1,4 +1,4 @@
-## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-09-14)
+## [1.0.12](https://github.com/VFiee/github-test/compare/v1.0.8...v1.0.12) (2020-09-17)
 
 ### Bug Fixes
 
@@ -9,6 +9,7 @@
 - **cli:** add taro platform change config ([2ecc23e](https://github.com/VFiee/github-test/commit/2ecc23efb1f7eed1c5ea6ce47bf060c67fc6bf50))
 - **component:** add transition component ([d907385](https://github.com/VFiee/github-test/commit/d907385d0f19dcbb964aa0b38e3621406b195885))
 - **component:** 优化 Empty 组件 ([585f3f5](https://github.com/VFiee/github-test/commit/585f3f54f7e1492d4fc96ea8c90736e4b889ce77))
+- **component:** 修改 icon 默认 style 样式为 class 样式 ([3b3950d](https://github.com/VFiee/github-test/commit/3b3950dcf6907187485ce979ec04a5fce363ee01))
 - **component:** 修改 navigationBar 为 AppBar,优化 AppBar ([d5761fb](https://github.com/VFiee/github-test/commit/d5761fb7897fe0437a5aabffa92812fa2ef93ddd))
 - **component:** 增加 options,使组件受外部 classNameclassName 影响 ([f27efb7](https://github.com/VFiee/github-test/commit/f27efb7bade400072e2e4c1b4d74bdcfcb74cf38))
 - **component:** 完善 image 组件,新增 icon 组件 ([f0f8a51](https://github.com/VFiee/github-test/commit/f0f8a513419cc267b778238abc9c4bff03d1bca4))

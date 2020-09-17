@@ -70,6 +70,16 @@ function Index() {
         className="test-item border-top"
         onClick={() =>
           navigateTo({
+            url: "/pages/field/index",
+          })
+        }
+      >
+        field
+      </View>
+      <View
+        className="test-item border-top"
+        onClick={() =>
+          navigateTo({
             url: "/pages/icon/index",
           })
         }

@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
 import { View, Image, CoverView, CoverImage } from "@tarojs/components";
+import { ViewProps } from "@tarojs/components/types/View";
 import { mergeStyle } from "@Util/index";
 import "./index.less";
 
-export interface IconProps {
+export interface IconProps extends ViewProps {
   isCover?: boolean;
   type: string;
   size?: string;
@@ -30,6 +31,7 @@ const Icon = (props: IconProps) => {
     className,
     fontFamily,
     isCover,
+    ...rest
   } = {
     ...defaultIconProps,
     ...props,
@@ -40,7 +42,7 @@ const Icon = (props: IconProps) => {
       mergeStyle(
         {
           color: color ?? "",
-          fontSize: size,
+          fontSize: size ?? "",
         },
         style
       ),
@@ -57,6 +59,7 @@ const Icon = (props: IconProps) => {
   }
   return (
     <CView
+      {...rest}
       style={mergedStyle}
       className={`__icon__ ${isImage ? `__icon__image__` : fontFamily} ${
         isImage ? "" : type

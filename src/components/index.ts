@@ -23,3 +23,5 @@ export { default as Overlay } from "./overlay";
 export { default as Transition } from "./transition";
 
 export { default as Cell, CellGroup } from "./cell";
+
+export { default as Field } from "./field";

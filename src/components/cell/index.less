@@ -1,10 +1,11 @@
+@import "../../style/hairline.less";
+
 // CellGroup
 .__cell__group__ {
   background-color: #ffff;
-  padding: 20px 32px;
 
   &title__ {
-    padding: 32px 0 16px 32px;
+    padding: 16px 0 10px 32px;
     font-size: 32px;
     color: #333;
     font-weight: bold;
@@ -29,6 +30,28 @@
   background-color: #fff;
   overflow: hidden;
   position: relative;
+  padding: 20px 32px;
+
+  &border__ {
+    .borderBottom(32px,32px);
+
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &required__ {
+    &::before {
+      content: "*";
+      position: absolute;
+      left: 14px;
+      color: #ee0a24;
+      font-size: 28px;
+      font-weight: bold;
+    }
+  }
 
   &center__ {
     align-items: center;

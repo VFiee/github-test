@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { View, Text } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import { IconProps } from "@Components/icon";
 import { ViewProps } from "@tarojs/components/types/View";
 import { CustomElement, CustomStyle } from "@Components/type";
@@ -26,6 +26,7 @@ export type ArrowDirection = "left" | "right" | "up" | "down";
 
 export interface CellProps extends ViewProps {
   title?: CustomElement;
+  colon?: boolean;
   titleClass?: string;
   titleStyle?: CustomStyle;
   value: CustomElement;
@@ -41,13 +42,24 @@ export interface CellProps extends ViewProps {
   required?: boolean;
   center?: boolean;
   arrow?: boolean;
+  border?: boolean;
   arrowDirection?: ArrowDirection;
   children?: CustomElement;
 }
 
+const defaultCellProps = {
+  colon: false,
+  replace: false,
+  center: false,
+  arrow: false,
+  border: true,
+  arrowDirection: "right",
+};
+
 const Cell = (props: CellProps) => {
   const {
     title,
+    colon,
     titleClass,
     titleStyle,
     value,
@@ -66,14 +78,16 @@ const Cell = (props: CellProps) => {
     center,
     className,
     onClick,
+    border,
     ...restProps
-  } = props;
+  } = {
+    ...defaultCellProps,
+    ...props,
+  };
 
   const _label = useMemo(() => {
     if (isUndefined(label)) return null;
-    return isReactElement(label) ? (
-      label
-    ) : (
+    return (
       <View
         className={`__cell__label__ ${labelClass ?? ""}`}
         style={labelStyle ?? ""}
@@ -84,16 +98,10 @@ const Cell = (props: CellProps) => {
   }, [label, labelClass, labelStyle]);
 
   const _icon = useMemo(() => {
-    if (isUndefined(icon) && !required) return null;
+    if (isUndefined(icon)) return null;
     let _iconProps = (typeof icon === "string"
       ? { type: icon }
       : icon) as IconProps;
-    if (required) {
-      _iconProps = {
-        type: "icon-required1",
-        className: "__cell__icon__required__",
-      };
-    }
     return isReactElement(icon) ? (
       icon
     ) : (
@@ -102,7 +110,7 @@ const Cell = (props: CellProps) => {
         className={`__cell__left__icon__ ${_iconProps?.className ?? ""}`}
       />
     );
-  }, [icon, required]);
+  }, [icon]);
 
   const _rightIcon = useMemo(() => {
     if (isUndefined(rightIcon) && !arrow) return null;
@@ -112,7 +120,7 @@ const Cell = (props: CellProps) => {
     if (arrow) {
       _iconProps = {
         type: "icon-back5",
-        className: `__cell__icon__arrow__ ${arrowDirection ?? "right"}`,
+        className: `__cell__icon__arrow__ ${arrowDirection ?? ""}`,
       };
     }
     return isReactElement(rightIcon) ? (
@@ -127,23 +135,20 @@ const Cell = (props: CellProps) => {
 
   const _title = useMemo(() => {
     if (isUndefined(title)) return null;
-    return isReactElement(title) ? (
-      title
-    ) : (
+    return (
       <View
         style={titleStyle ?? ""}
         className={`__cell__title__ ${titleClass ?? ""}`}
       >
-        <Text>{title}</Text>
+        {title}
+        {colon ? ":" : ""}
         {_label}
       </View>
     );
-  }, [_label, title, titleClass, titleStyle]);
+  }, [_label, colon, title, titleClass, titleStyle]);
 
   const _value = useMemo(() => {
-    return isReactElement(value) ? (
-      value
-    ) : (
+    return (
       <View
         className={`__cell__value__ ${
           isNull(_title) ? "__cell__value__only__" : ""
@@ -168,9 +173,9 @@ const Cell = (props: CellProps) => {
         // @ts-ignore
         replace ? redirectTo(url) : navigateTo({ url });
       }}
-      className={`__cell__ ${center ? "__cell__center__" : ""} ${
-        className ?? ""
-      }`}
+      className={`__cell__  ${required ? "__cell__required__" : ""} ${
+        border ? "__cell__border__" : ""
+      } ${center ? "__cell__center__" : ""} ${className ?? ""}`}
     >
       {_icon}
       {_title}
@@ -209,7 +214,7 @@ const CellGroup = (props: CellGroupProps): typeof CellGroup => {
     return !isReactElement(title) ? (
       <View
         style={titleStyle}
-        className={`__cell__group__title__ ${titleClass}`}
+        className={`__cell__group__title__ ${titleClass ?? ""}`}
       >
         {title}
       </View>

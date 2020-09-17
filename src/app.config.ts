@@ -12,6 +12,7 @@ export default {
     "pages/loading/index",
     "pages/overlay/index",
     "pages/transition/index",
+    "pages/field/index",
   ],
   window: {
     backgroundTextStyle: "light",
