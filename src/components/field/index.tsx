@@ -3,7 +3,13 @@ import { View } from "@tarojs/components";
 import { Cell, Icon } from "@Components/index";
 import { IconProps } from "@Components/icon";
 import { CellProps } from "@Components/cell";
-import { compact, isFunction, isUndefined, pick } from "@Util/index";
+import {
+  compact,
+  isFunction,
+  isUndefined,
+  mergeStyle,
+  pick,
+} from "@Util/index";
 import { CustomStyle, CustomTextAlign, CustomElement } from "@Components/type";
 import { useUpdate } from "@Hooks/index";
 import Input, { InputProps } from "./baseInput";
@@ -20,30 +26,32 @@ type FieldType =
 
 type ClearTriggerType = "focus" | "always";
 
-type FormatTriggleType = "onChange" | "onBlur";
+type TriggleType = "onChange" | "onBlur";
 
 type Formatter = (value: any) => any;
 
-export interface Rule {
-  required?: boolean;
-  message?: string | ((value: any, rule: Rule) => string);
-  validator?: (value: any, rule: Rule) => boolean | Promise<any>;
-  pattern?: RegExp;
-  triggle?: FormatTriggleType;
-  formatter?: (value: any, rule: Rule) => any;
-}
+// export interface Rule {
+//   required?: boolean;
+//   message?: string | ((value: any, rule: Rule) => string);
+//   validator?: (value: any, rule: Rule) => boolean | Promise<any>;
+//   pattern?: RegExp;
+//   formatter?: (value: any, rule: Rule) => any;
+// }
 
 export interface FieldProps
   extends Omit<InputProps, "type" | "placeholderStyle"> {
   // Input
+  name?: string;
+  key?: string;
   type?: FieldType;
   inputClass?: string;
   inputStyle?: CustomStyle;
   inputAlign?: CustomTextAlign;
+  readonly?: boolean;
   // Cell
   colon?: boolean;
-  leftIcon?: CustomElement | IconProps;
-  rightIcon?: CustomElement | IconProps;
+  leftIcon?: string | IconProps;
+  rightIcon?: string | IconProps;
   label?: CustomElement;
   labelClass?: string;
   labelStyle?: CustomStyle;
@@ -63,9 +71,7 @@ export interface FieldProps
   errorAlign?: CustomTextAlign;
   // format
   formatter?: Formatter;
-  formatTrigger?: FormatTriggleType;
-  // Rule
-  rules?: Rule[];
+  formatTrigger?: TriggleType;
   // Children
   children?: CustomElement;
   // Events
@@ -86,9 +92,23 @@ const defaultFieldProps = {
   clearTrigger: "focus",
   showWordLimit: false,
   inputAlign: "left",
-  error: false,
+  showError: true,
   formatTriggleType: "onChange",
   placeholderClass: "input-placeholder",
+};
+
+const getIconProps = (
+  props: string | IconProps | undefined,
+  fn: any
+): string | IconProps | undefined => {
+  if (!isFunction(fn) || isUndefined(undefined)) return props;
+  if (typeof props === "string") {
+    return {
+      type: props,
+      onClick: fn,
+    };
+  }
+  return props?.onClick ? props : { ...(props as IconProps), onClick: fn };
 };
 
 const getCellProps = (props: FieldProps): CellProps => {
@@ -103,12 +123,12 @@ const getCellProps = (props: FieldProps): CellProps => {
     labelStyle,
     labelAlign,
     inputAlign,
+    onLeftIconClick,
+    onRightIconClick,
   } = props;
   return compact(
     {
       colon,
-      icon: leftIcon,
-      rightIcon,
       required,
       center,
       title: label,
@@ -116,10 +136,11 @@ const getCellProps = (props: FieldProps): CellProps => {
       titleClass: `__field__label__ ${
         labelAlign ? `__field__label__${labelAlign}__` : ""
       } ${labelClass ?? ""} `,
-      value: "",
       valueClass: `__field__value__ ${
         inputAlign ? `__field__value__${inputAlign}__` : ""
       }`,
+      icon: getIconProps(leftIcon, onLeftIconClick),
+      rightIcon: getIconProps(rightIcon, onRightIconClick),
     },
     isUndefined
   ) as CellProps;
@@ -132,6 +153,8 @@ const getInputProps = (props: FieldProps): InputProps => {
     onInputClick,
     inputClass,
     fixed,
+    readonly,
+    disabled,
     autoHeight,
     showConfirmBar,
     disableDefaultPadding,
@@ -143,7 +166,6 @@ const getInputProps = (props: FieldProps): InputProps => {
     "placeholder",
     "placeholderClass",
     "placeholderStyle",
-    "disabled",
     "cursorSpacing",
     "focus",
     "confirmType",
@@ -163,6 +185,7 @@ const getInputProps = (props: FieldProps): InputProps => {
   ]);
   inputProps = {
     ...inputProps,
+    disabled: disabled || readonly,
     isTextarea: type === "textarea",
     password: type === "password",
     type: type === "tel" ? "number" : type,
@@ -187,10 +210,10 @@ const getInputProps = (props: FieldProps): InputProps => {
 };
 
 const getErrorProps = (props: FieldProps): object => {
-  let { errorClass, errorStyle, errorAlign } = props;
+  let { errorClass, errorStyle, errorAlign, errorMsg } = props;
   return compact(
     {
-      style: errorStyle,
+      style: mergeStyle(errorStyle, errorMsg ? "" : `display:none;`),
       className: `__field__error__ ${errorClass ?? ""} ${
         errorAlign ? `__field__error__${errorAlign}__` : ""
       }`,
@@ -215,7 +238,7 @@ const formatFn = (_value: any, fn?: Function): any => {
 };
 
 const Field = (props: FieldProps) => {
-  let { formatter, formatTrigger } = props;
+  let { formatter, formatTrigger, disabled, readonly } = props;
   const update = useUpdate();
   let valueRef = useRef(props?.value ?? "");
   let focusRef = useRef(!!props?.focus);
@@ -245,10 +268,9 @@ const Field = (props: FieldProps) => {
         valueRef.current = callbackValue;
       }
     }
-    console.log(`onInput:`, valueRef.current);
+    // 校验
     update();
-    console.log(`onInput:`, valueRef.current);
-    // return value;
+    return valueRef.current;
   };
   const _props = {
     ...defaultFieldProps,
@@ -258,9 +280,6 @@ const Field = (props: FieldProps) => {
     onInput,
     value: valueRef.current,
   } as FieldProps;
-  const cellProps = getCellProps(_props);
-  const errorProps = getErrorProps(_props);
-  const wordLimitProps = getWordLimitProps(_props);
   const {
     showError,
     errorMsg,
@@ -270,16 +289,17 @@ const Field = (props: FieldProps) => {
     clearTrigger,
     onClear: _onClear,
   } = _props;
-
+  const cellProps = getCellProps(_props);
+  const errorProps = getErrorProps(_props);
+  const wordLimitProps = getWordLimitProps(_props);
   const onClear = (eve) => {
     valueRef.current = "";
     focusRef.current = false;
     _onClear?.(eve);
     update();
   };
-  console.log(`value:`, valueRef.current);
-
   const showClear =
+    !(disabled || readonly) &&
     valueRef.current.length > 0 &&
     (clearTrigger === "focus" ? focusRef.current : true);
 
@@ -291,7 +311,7 @@ const Field = (props: FieldProps) => {
           <Icon
             type="close-filled"
             className="__field__clear__"
-            style={showClear ? `` : `display:none`}
+            style={showClear ? "" : `display:none`}
             onClick={onClear}
           />
         )}
@@ -301,17 +321,19 @@ const Field = (props: FieldProps) => {
           valueRef.current?.length ?? 0
         }/${maxlength}`}</View>
       )}
-      {!!showError && errorMsg && <View {...errorProps}>{errorMsg}</View>}
+      {!!showError && <View {...errorProps}>{errorMsg}</View>}
     </React.Fragment>
   );
   return (
     <Cell
       {...cellProps}
       className={`__field__ ${_props?.disabled ? `__field__disabled__` : ""} ${
-        _props?.className ?? ""
-      }`}
+        _props?.readonly ? `__field__readonly__` : ""
+      } ${_props?.className ?? ""}`}
       value={fieldValue}
-    ></Cell>
+    >
+      {props?.children}
+    </Cell>
   );
 };
 

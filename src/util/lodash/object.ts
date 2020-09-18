@@ -12,8 +12,9 @@ export function compact(
   value: [] | object,
   fn?: (arg: any) => boolean
 ): [] | object {
+  const predicate = fn || Boolean;
   if (isArray(value)) {
-    return value.filter(fn || Boolean);
+    return value.filter(predicate);
   }
   if (!isObject(value)) return value;
   let keys = Object.keys(value);
@@ -23,7 +24,7 @@ export function compact(
     let item = value[keys[i]];
     if (isArray(item) || isObject(item)) {
       res[keys[i]] = compact(item, fn);
-    } else if (!!item) {
+    } else if (!predicate(item)) {
       res[keys[i]] = item;
     }
   }
@@ -119,6 +120,35 @@ export function pick(object: BaseObject, props: string | string[] | predicate) {
         res[value] = object[value];
       }
     });
+  }
+  return res;
+}
+
+type MergeProps = {
+  object: BaseObject;
+  source: BaseObject;
+};
+export function merge(
+  { object, source }: MergeProps,
+  isDeep: boolean = false
+): BaseObject {
+  if (!isDeep) {
+    return Object.assign({}, object, source);
+  }
+  let res = {};
+  for (const key in object) {
+    if (hasOwnProperty.call(object, key)) {
+      if (hasOwnProperty.call(source, key)) {
+        if (isObject(object[key]) && isObject(source[key])) {
+          res[key] = merge(
+            { object: object[key], source: source[key] },
+            isDeep
+          );
+        }
+        res[key] = source[key];
+      }
+      res[key] = object[key];
+    }
   }
   return res;
 }

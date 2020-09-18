@@ -23,7 +23,7 @@
 .__cell__ {
   display: flex;
   font-size: 28px;
-  line-height: 38px;
+  line-height: 48px;
   color: #333;
   width: 100%;
   box-sizing: border-box;
@@ -70,7 +70,7 @@
 
   &value__ {
     flex: 1;
-    text-align: right;
+    text-align: left;
     color: #999;
 
     &only__ {
@@ -79,12 +79,10 @@
     }
   }
 
+  &right__icon__,
   &left__icon__ {
-    margin-right: 8px;
-  }
-
-  &right__icon__ {
-    margin-left: 8px;
+    padding: 0 8px;
+    line-height: 42px;
   }
 
   &icon__arrow__ {

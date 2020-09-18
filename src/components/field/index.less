@@ -27,6 +27,7 @@
   &value__ {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     &body__ {
       display: flex;
@@ -42,7 +43,6 @@
 
   &disabled__ {
     opacity: 0.7;
-    cursor: none;
     cursor: not-allowed;
 
     .__field__label__ {
@@ -50,11 +50,16 @@
     }
   }
 
+  &readonly__ {
+    cursor: not-allowed;
+  }
+
   &control__ {
-    font-size: 30px;
+    font-size: 28px;
     width: 100%;
     min-width: 0;
-    min-height: 50px;
+    min-height: 0;
+    height: auto;
     display: block;
     box-sizing: border-box;
     margin: 0;
@@ -73,9 +78,7 @@
   }
 
   &textarea__ {
-    min-height: 60px;
-    font-size: 30px;
-    line-height: 40px;
+    box-sizing: border-box;
     max-height: 250px;
   }
 

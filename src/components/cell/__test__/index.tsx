@@ -8,7 +8,11 @@ const TestCell = () => {
     <View className="wrap">
       <CellGroup title="基础用法">
         <Cell title="默认情况" value="value是必填的" />
-        <Cell title="添加描述信息" label="我是描述信息" value="value是必填的" />
+        <Cell
+          title="很长的描述信息很长的描述信息哦"
+          label="我是描述信息"
+          value="value是必填的"
+        />
         <Cell
           center
           title="添加描述信息,内容居中"
@@ -42,6 +46,12 @@ const TestCell = () => {
           rightIcon="icon-caidan"
           title="左右边都是Icon"
           value="value是必填的"
+        />
+        <Cell
+          title="自定义Icon元素"
+          value="value必填"
+          icon={<View>[icon]</View>}
+          rightIcon={<View>[icon]</View>}
         />
       </CellGroup>
 

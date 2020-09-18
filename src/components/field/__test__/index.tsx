@@ -7,26 +7,26 @@ const Test = () => {
   return (
     <View className="wrap">
       <Field
+        clear
         showError
         value="123"
-        errorMsg="您输入的格式有误"
-        // type="te"
+        errorMsg=""
         label="文本"
         placeholder="请输入文本"
-        clear
       />
       <Field
+        clear
+        readonly
         label="用户名"
         value="vyron"
         placeholder="请输入用户名"
-        clear
-        clearTrigger="always"
-        // onInput={(eve) => {
-        //   // setValue(eve.detail.value);
-        //   return "test";
-        // }}
+        onInput={(eve) => {
+          console.log(`onInput:`, eve);
+          return "test";
+        }}
       />
       <Field
+        readonly
         leftIcon="icon-home"
         label="备注"
         type="textarea"
@@ -47,7 +47,7 @@ const Test = () => {
         onClear={(eve) => {
           console.log(`onClear:`, eve);
         }}
-      />
+      ></Field>
     </View>
   );
 };

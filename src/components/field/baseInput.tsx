@@ -16,6 +16,8 @@ export interface InputProps extends _InputProps {
 
 const BaseInput = (props: InputProps) => {
   const { isTextarea, ...rest } = props;
+  console.log(props);
+
   const Component = isTextarea ? Textarea : Input;
   console.log(`rest.value:`, rest.value);
 
